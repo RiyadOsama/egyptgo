@@ -1,5 +1,6 @@
-import Modal from "@/components/modal";
 import PackageCard from "@/components/package-card";
+import { Plus } from "lucide-react";
+import Link from "next/link";
 
 export default function AdminPacksPage() {
   return (
@@ -12,21 +13,20 @@ export default function AdminPacksPage() {
           </p>
         </div>
         <div>
-          <Modal
-            title="Create Package"
-            description="Enter your package details below."
-            createClassName="bg-orange-600 text-white hover:bg-orange-700 hover:text-white font-semibold  rounded-lg"
-            packages
+          <Link
+            href="/dashboard/packs/create-package"
+            className="bg-orange-600 text-white hover:bg-orange-700 hover:text-white font-semibold rounded-lg py-2 px-4 flex items-center"
           >
-            + Create
-          </Modal>
+            <Plus className="mr-2 h-4 w-4" />
+            Create
+          </Link>
         </div>
       </div>
-      <div className="max-w-7xl py-10 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="max-w-7xl py-10 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <PackageCard show />
         <PackageCard show />
-        <PackageCard />
-        <PackageCard />
+        <PackageCard show/>
+        <PackageCard show/>
       </div>
     </div>
   );
