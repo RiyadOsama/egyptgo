@@ -1,7 +1,47 @@
 export default function LoginPage() {
   return (
-    <main className="max-w-7xl mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-6">Login</h1>
+    <main className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+      <div className="w-full max-w-md">
+        <form className="bg-white p-6 rounded-lg shadow-md">
+          <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
+          <div className="mb-4">
+            <label
+              htmlFor="email"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              className="w-full border border-gray-300 p-2 rounded-md"
+              placeholder="Enter your email"
+            />
+          </div>
+
+          <div className="mb-6">
+            <label
+              htmlFor="password"
+              className="block text-gray-700 font-semibold mb-2"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              id="password"
+              className="w-full border border-gray-300 p-2 rounded-md"
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-orange-600 text-white p-2 rounded-md hover:bg-orange-700 transition duration-300"
+          >
+            Login
+          </button>
+        </form>
+      </div>
     </main>
   );
 }
