@@ -1,5 +1,4 @@
 import DestinationCard from "@/components/destination-card";
-import Modal from "@/components/modal";
 import { Plus } from "lucide-react";
 import Link from "next/link";
 

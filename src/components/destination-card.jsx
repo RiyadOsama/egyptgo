@@ -5,7 +5,7 @@ import { Edit, Delete } from "lucide-react"
 
 export default function DestinationCard({ show = false }) {
     return(
-        <div className="border rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-white">
+        <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-white">
             <Image src={img} alt="Cairo" className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"/>
             <div className="p-4 mt-4">
                 <h3 className="text-xl font-semibold mb-2">Cairo</h3>

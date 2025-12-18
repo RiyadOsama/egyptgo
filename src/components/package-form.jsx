@@ -1,5 +1,6 @@
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
+import SelectMenu from "./select-menu";
 
 export default function PackageForm() {
   return (
@@ -17,6 +18,10 @@ export default function PackageForm() {
             <Label htmlFor="price">Price (USD)</Label>
             <Input id="price" type="number" placeholder="e.g. 2500" />
         </div>
+      </div>
+      <div className="grid gap-2 mb-4">
+        <Label htmlFor="destination">Destination</Label>
+        <SelectMenu />
       </div>
       <div className="grid gap-2 mb-4">
         <Label htmlFor="description">Activities</Label>
