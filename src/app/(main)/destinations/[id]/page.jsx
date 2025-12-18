@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function DestinationDetailPage() {
   return (
-    <main className="bg-(--background)">
+    <main className="bg-background">
       <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
@@ -13,10 +13,10 @@ export default function DestinationDetailPage() {
                 Destinations
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-(--foreground) font-semibold">Aswan</span>
+              <span className="text-foreground font-semibold">Aswan</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold text-(--foreground) mb-4 tracking-tight">Aswan</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">Aswan</h1>
             <p className="text-lg text-muted-(--foreground) max-w-3xl">
               Experience the beauty of the Nile with golden sunsets and ancient temples.
             </p>
@@ -40,7 +40,7 @@ export default function DestinationDetailPage() {
 
           <div className="mb-16">
             <div className="flex items-center justify-between mb-6 gap-4">
-              <h2 className="text-3xl font-bold text-(--foreground)">Available Packages</h2>
+              <h2 className="text-3xl font-bold text-foreground">Available Packages</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <AvailablePackageCard />

@@ -38,7 +38,7 @@ export default function AppSidebar() {
 
     return (
         <Sidebar>
-            <SidebarHeader className="border-b px-6 py-4 flex flex-row items-center gap-2">
+            <SidebarHeader className="px-6 py-4 flex flex-row items-center gap-2">
                 <PlaneIcon className="w-8 h-8 text-orange-600"/>
                 <h2 className="text-xl font-semibold">TWU</h2>
             </SidebarHeader>
@@ -63,7 +63,7 @@ export default function AppSidebar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter className="border-t px-6 py-4">
+            <SidebarFooter className="px-6 py-4">
                 <p className="text-xs text-muted-foreground">Admin Dashboard v1.0</p>
             </SidebarFooter>
         </Sidebar>
