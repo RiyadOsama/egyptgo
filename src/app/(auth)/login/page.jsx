@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
@@ -32,6 +34,9 @@ export default function LoginPage() {
               className="w-full border border-gray-300 p-2 rounded-md"
               placeholder="Enter your password"
             />
+            <Link href="/reset-password" className="text-orange-600 hover:underline mt-4 block">
+              Forgot Password?
+            </Link>
           </div>
 
           <button
@@ -40,6 +45,11 @@ export default function LoginPage() {
           >
             Login
           </button>
+          <div>
+            <Link href="/signup" className="text-black hover:underline mt-4 block text-center">
+              Don't have an account? Sign up
+            </Link>
+          </div>
         </form>
       </div>
     </main>

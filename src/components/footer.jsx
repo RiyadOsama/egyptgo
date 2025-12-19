@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+              <div className="w-fit p-1 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-background font-bold">TWU</span>
               </div>
               <span className="font-bold">Travel With Us</span>
