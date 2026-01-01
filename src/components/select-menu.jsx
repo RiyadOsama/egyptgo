@@ -1,16 +1,28 @@
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-export default function SelectMenu() {
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from "./ui/select";
+
+export default function SelectMenu({ destinationsData, value, onChange }) {
+  const destinations = destinationsData?.data || [];
+
   return (
-    <Select>
-      <SelectTrigger className="w-[180px]">
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className="w-[200px]">
         <SelectValue placeholder="Select Destination" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="aswan">Aswan</SelectItem>
-        <SelectItem value="luxor">Luxor</SelectItem>
-        <SelectItem value="paris">Paris</SelectItem>
-        <SelectItem value="paris">Paris</SelectItem>
-        <SelectItem value="cairo">Cairo</SelectItem>
+        {destinations.map(d => {
+          const itemValue = String(d._id || d.id);
+          return (
+            <SelectItem key={itemValue} value={itemValue}>
+              {d.name}
+            </SelectItem>
+          );
+        })}
       </SelectContent>
     </Select>
   );

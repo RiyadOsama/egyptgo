@@ -7,7 +7,7 @@ export default async function EditPackagePage({ params }) {
       <h1 className="text-3xl font-bold mb-6">Edit Your Package</h1>
       <p>Use the form below to Update Your travel package.</p>
       <div className="mt-6 bg-card p-6 rounded-lg shadow-md">
-        <PackageForm />
+        <PackageForm id={id} />
       </div>
     </div>
   );

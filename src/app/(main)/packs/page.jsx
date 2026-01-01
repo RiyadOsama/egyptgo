@@ -2,9 +2,13 @@
 import { allPackages } from "@/lib/mock-data";
 import { useState } from "react";
 import Link from "next/link";
+import { useGetFullPackages } from "@/hooks/use-packages";
 
 export default function Packages() {
   const [sortBy, setSortBy] = useState("name");
+  const { data } = useGetFullPackages();
+  const allPackages = data?.data || [];
+  console.log("All packages data:", allPackages);
 
   const sorted = [...allPackages].sort((a, b) => {
     if (sortBy === "price-low") return a.price - b.price;
@@ -40,7 +44,7 @@ export default function Packages() {
                   <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer group h-full flex flex-col">
                     <div className="relative h-56 overflow-hidden bg-muted">
                       <img
-                        src={pkg.image || "/placeholder.svg"}
+                        src={pkg.image.url || "/placeholder.svg"}
                         alt={pkg.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
                       />
@@ -53,8 +57,8 @@ export default function Packages() {
                       <p className="text-xs text-muted-foreground font-medium mb-3">{pkg.destinationName}</p>
                       <p className="text-muted-foreground text-sm mb-4 flex-1">{pkg.description}</p>
                       <div className="flex justify-between items-center text-xs text-muted-foreground">
-                        <span>{pkg.duration}</span>
-                        <span>{pkg.groupSize}</span>
+                        <span>Duration {pkg.duration}</span>
+                        <span>Group Size {pkg.groupSize}</span>
                       </div>
                     </div>
                   </div>

@@ -13,6 +13,7 @@ import {
   SidebarMenuItem,
 } from "./ui/sidebar";
 import { usePathname } from "next/navigation";
+import LogoutButton from "./logout.button";
 
 const items = [
   {
@@ -52,8 +53,8 @@ export default function AppSidebar() {
                     asChild
                     className={`${
                       pathname === item.href
-                        ? "bg-primary text-primary-foreground hover:opacity-90 hover:text-primary-foreground"
-                        : "hover:bg-muted"
+                        ? "bg-primary text-primary-foreground hover:text-primary-foreground hover:bg-orange-700"
+                        : "hover:bg-primary/10 hover:text-primary"
                     } rounded-md text-md transition duration-400`}
                   >
                     <Link href={item.href}>
@@ -68,7 +69,7 @@ export default function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="px-6 py-4">
-        <p className="text-xs text-muted-foreground">Admin Dashboard v1.0</p>
+        <LogoutButton className="w-full text-black text-md cursor-pointer transition duration-300 hover:bg-orange-50 py-2 rounded-md"/>
       </SidebarFooter>
     </Sidebar>
   );

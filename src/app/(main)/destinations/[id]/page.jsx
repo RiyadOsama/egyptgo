@@ -1,8 +1,23 @@
+'use client'
 import AvailablePackageCard from "@/components/avilable-pakage-card";
 import Image from "next/image";
 import Link from "next/link";
+import { useGetDestinationById } from "@/hooks/use-destinations";
+import { useParams } from "next/navigation";
 
 export default function DestinationDetailPage() {
+  const params = useParams();
+  // const { id } = params;
+  const { data: destinationData, isLoading: isDestinationLoading, isError: isDestinationError } = useGetDestinationById(params.id);
+  const destination = destinationData?.data || {};
+
+  if(isDestinationLoading){
+    return <div className="text-center py-20">Loading...</div>;
+  }
+  if(isDestinationError){
+    return <div className="text-center py-20">Error loading destination details.</div>;
+  }
+  console.log("Destination data in detail page:", destinationData);
   return (
     <main className="bg-background">
       <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
@@ -13,27 +28,29 @@ export default function DestinationDetailPage() {
                 Destinations
               </Link>
               <span className="mx-2">/</span>
-              <span className="text-foreground font-semibold">Aswan</span>
+              <span className="text-foreground font-semibold">{destination.name}</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">Aswan</h1>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">{destination?.name}</h1>
             <p className="text-lg text-muted-(--foreground) max-w-3xl">
-              Experience the beauty of the Nile with golden sunsets and ancient temples.
+              {destination.description}
             </p>
           </div>
 
           <div className="mb-12 rounded-lg overflow-hidden shadow-lg relative">
-            <Image
-              src="/imgs/destinations/aswan-nile-sunset-egypt.jpg"
-              alt="Aswan"
-              width={1200}
-              height={720}
-              className="w-full h-96 object-cover"
-              priority
-            />
+            {destination.image?.url && (
+              <Image
+                src={destination?.image.url}
+                alt={destination.name}
+                width={1280}
+                height={720}
+                className="w-full h-96 object-cover"
+                priority
+              />
+            )}
             <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
             <div className="absolute bottom-4 left-4 text-primary-foreground pointer-events-none">
-              <h3 className="text-lg font-semibold drop-shadow">Nile Sunset — Aswan</h3>
+              <h3 className="text-lg font-semibold drop-shadow">Nile Sunset — {destination?.name}</h3>
               <p className="text-sm opacity-90 drop-shadow">Golden hour views and traditional felucca rides</p>
             </div>
           </div>
@@ -43,10 +60,7 @@ export default function DestinationDetailPage() {
               <h2 className="text-3xl font-bold text-foreground">Available Packages</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <AvailablePackageCard />
-              <AvailablePackageCard />
-              <AvailablePackageCard />
-              <AvailablePackageCard />
+              <AvailablePackageCard destinationId = {params.id} destinationImage={destination.image?.url} />
             </div>
           </div>
         </div>

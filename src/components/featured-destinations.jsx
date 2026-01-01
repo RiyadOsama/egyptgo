@@ -7,8 +7,6 @@ export default function FeaturedDestinations() {
       <p className="text-center mb-8">Explore our most popular Egyptian destinations with carefully curated packages</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <DestinationCard />
-        <DestinationCard />
-        <DestinationCard />
       </div>
       <div className="flex justify-center items-center">
         <button className="bg-primary mt-8 text-lg text-primary-foreground px-4 py-2 rounded-lg hover:opacity-90 transition duration-300 cursor-pointer">
