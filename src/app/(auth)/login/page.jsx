@@ -1,37 +1,37 @@
-'use client'
-import { useState } from "react";
-import Link from "next/link";
-import { useLogin } from "@/hooks/use-auth";
-import { useRouter } from "next/navigation";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useLogin } from '@/hooks/use-auth';
+import { useRouter } from 'next/navigation';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const loginMutation = useLogin();
   const router = useRouter();
 
-  const LoginSubmitHandler = (e)=>{
+  const LoginSubmitHandler = (e) => {
     e.preventDefault();
     loginMutation.mutate(
-      {email,password},
+      { email, password },
       {
-        onSuccess:(data)=>{
-          console.log("Login success, redirecting...", email);
-          console.log("Cookies:", document.cookie);
+        onSuccess: (data) => {
+          console.log('Login success, redirecting...', email);
+          console.log('Cookies:', document.cookie);
           // Use window.location for full page reload to ensure cookies are sent
           setTimeout(() => {
-            if(email.startsWith("admin")){
-              console.log("Redirecting to dashboard");
+            if (email.startsWith('admin')) {
+              console.log('Redirecting to dashboard');
               window.location.href = '/dashboard';
-            }else{
-              console.log("Redirecting to home");
+            } else {
+              console.log('Redirecting to home');
               window.location.href = '/';
             }
           }, 300);
-        }
-      }
+        },
+      },
     );
-  }
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center bg-background px-4">
@@ -74,7 +74,7 @@ export default function LoginPage() {
             className="w-full bg-primary text-primary-foreground p-2 rounded-md hover:opacity-90 transition cursor-pointer duration-300"
             onClick={LoginSubmitHandler}
           >
-            {loginMutation.isPending ? "Loading..." : "Login"}
+            {loginMutation.isPending ? 'Loading...' : 'Login'}
           </button>
           <div>
             <Link href="/signup" className="text-primary-black hover:underline mt-4 block text-center">

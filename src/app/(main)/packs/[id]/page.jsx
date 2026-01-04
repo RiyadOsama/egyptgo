@@ -1,16 +1,16 @@
-"use client";
-import { allPackages } from "@/lib/mock-data";
-import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { Check } from "lucide-react";
-import { useGetPackageById } from "@/hooks/use-packages";
+'use client';
+import { allPackages } from '@/lib/mock-data';
+import { useParams, useRouter } from 'next/navigation';
+import Link from 'next/link';
+import Image from 'next/image';
+import { Check } from 'lucide-react';
+import { useGetPackageById } from '@/hooks/use-packages';
 
 export default function PackageDetailPage() {
   const params = useParams();
   const { data, isLoading, isError } = useGetPackageById(params.id);
   const packageData = data?.data;
-  console.log("Package data in detail page:", packageData);
+  console.log('Package data in detail page:', packageData);
   const router = useRouter();
   // const pkg = allPackages.find((p) => p.id === params.id);
 
@@ -21,13 +21,14 @@ export default function PackageDetailPage() {
           <p>Loading...</p>
         </div>
       </>
-    );}
+    );
+  }
   if (isError || !packageData) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <p>Error loading package details.</p>
       </div>
-    )
+    );
   }
 
   return (

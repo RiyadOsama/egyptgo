@@ -1,4 +1,4 @@
-import { DestinationMainCard } from "@/components/destination-main-card";
+import { DestinationMainCard } from '@/components/destination-main-card';
 
 export default function DestinationsPage() {
   return (

@@ -1,18 +1,18 @@
-"use client";
-import { allPackages } from "@/lib/mock-data";
-import { useState } from "react";
-import Link from "next/link";
-import { useGetFullPackages } from "@/hooks/use-packages";
+'use client';
+import { allPackages } from '@/lib/mock-data';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useGetFullPackages } from '@/hooks/use-packages';
 
 export default function Packages() {
-  const [sortBy, setSortBy] = useState("name");
+  const [sortBy, setSortBy] = useState('name');
   const { data } = useGetFullPackages();
   const allPackages = data?.data || [];
-  console.log("All packages data:", allPackages);
+  console.log('All packages data:', allPackages);
 
   const sorted = [...allPackages].sort((a, b) => {
-    if (sortBy === "price-low") return a.price - b.price;
-    if (sortBy === "price-high") return b.price - a.price;
+    if (sortBy === 'price-low') return a.price - b.price;
+    if (sortBy === 'price-high') return b.price - a.price;
     return a.name.localeCompare(b.name);
   });
   return (
@@ -44,7 +44,7 @@ export default function Packages() {
                   <div className="bg-card rounded-lg overflow-hidden shadow-md hover:shadow-lg transition cursor-pointer group h-full flex flex-col">
                     <div className="relative h-56 overflow-hidden bg-muted">
                       <img
-                        src={pkg.image.url || "/placeholder.svg"}
+                        src={pkg.image.url || '/placeholder.svg'}
                         alt={pkg.name}
                         className="w-full h-full object-cover group-hover:scale-110 transition duration-300"
                       />

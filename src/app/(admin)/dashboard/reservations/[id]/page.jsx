@@ -1,59 +1,62 @@
 'use client';
-import { Button } from "@/components/ui/button";
-import { Calendar, Mail, Phone, User, MapPin, Users, DollarSign, Package, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { useGetBookingById } from "@/hooks/use-bookings";
-import { useGetUserById } from "@/hooks/use-user";
-import { useGetPackageById } from "@/hooks/use-packages";
-import { useParams } from "next/navigation";
+import { Button } from '@/components/ui/button';
+import { Calendar, Mail, Phone, User, MapPin, Users, DollarSign, Package, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { useGetBookingById } from '@/hooks/use-bookings';
+import { useGetUserById } from '@/hooks/use-user';
+import { useGetPackageById } from '@/hooks/use-packages';
+import { useParams } from 'next/navigation';
 
 const mockReservation = {
   id: 1,
-  customerName: "John Smith",
-  email: "john.smith@email.com",
-  phone: "+1 (555) 123-4567",
-  packageName: "Tropical Paradise - Bali",
-  destination: "Bali, Indonesia",
-  bookingDate: "2024-12-10",
-  travelDate: "2025-01-15",
-  returnDate: "2025-01-22",
+  customerName: 'John Smith',
+  email: 'john.smith@email.com',
+  phone: '+1 (555) 123-4567',
+  packageName: 'Tropical Paradise - Bali',
+  destination: 'Bali, Indonesia',
+  bookingDate: '2024-12-10',
+  travelDate: '2025-01-15',
+  returnDate: '2025-01-22',
   guests: 2,
-  totalPrice: "$2,499",
-  status: "confirmed",
-  paymentMethod: "Credit Card",
-  specialRequests: "Vegetarian meals, Early check-in if possible",
+  totalPrice: '$2,499',
+  status: 'confirmed',
+  paymentMethod: 'Credit Card',
+  specialRequests: 'Vegetarian meals, Early check-in if possible',
   packageDetails: {
     duration: 7,
-    activities: ["Beach relaxation", "Temple tours", "Surfing lessons", "Spa treatments"],
-    accommodation: "5-star beachfront resort",
-    mealsIncluded: "Breakfast & Dinner",
+    activities: ['Beach relaxation', 'Temple tours', 'Surfing lessons', 'Spa treatments'],
+    accommodation: '5-star beachfront resort',
+    mealsIncluded: 'Breakfast & Dinner',
   },
 };
 
 export default function ReservationDetailPage() {
   const params = useParams();
-  const {data:reservation, isLoading, isError} = useGetBookingById(params.id);
-  console.log("Reservation data in detail page:", reservation);
-  const {data:userData, isLoading:userLoading, isError:userError} = useGetUserById(reservation?.data.userId);
-  console.log("User data in detail page:", userData);
-  const {data:packageData, isLoading:packageLoading, isError:packageError} = useGetPackageById(reservation?.data.packageId);
-  console.log("Package data in detail page:", packageData);
-  const formattedDate = new Date(reservation?.data.createdAt)
-  .toLocaleDateString("en-GB");
-  if(isLoading || userLoading){
+  const { data: reservation, isLoading, isError } = useGetBookingById(params.id);
+  console.log('Reservation data in detail page:', reservation);
+  const { data: userData, isLoading: userLoading, isError: userError } = useGetUserById(reservation?.data.userId);
+  console.log('User data in detail page:', userData);
+  const {
+    data: packageData,
+    isLoading: packageLoading,
+    isError: packageError,
+  } = useGetPackageById(reservation?.data.packageId);
+  console.log('Package data in detail page:', packageData);
+  const formattedDate = new Date(reservation?.data.createdAt).toLocaleDateString('en-GB');
+  if (isLoading || userLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-      <p>Loading...</p>
+        <p>Loading...</p>
       </div>
     );
   }
 
-  if(isError || userError){
+  if (isError || userError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-      <p>Error loading Details.</p>
+        <p>Error loading Details.</p>
       </div>
-    )
+    );
   }
   return (
     <div>

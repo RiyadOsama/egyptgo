@@ -1,4 +1,4 @@
-import DestinationCard from "./destination-card";
+import DestinationCard from './destination-card';
 
 export default function FeaturedDestinations() {
   return (

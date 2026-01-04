@@ -1,17 +1,17 @@
-"use client";
+'use client';
 
-import { Mail, Phone, MapPin } from "lucide-react";
-import { useState } from "react";
+import { Mail, Phone, MapPin } from 'lucide-react';
+import { useState } from 'react';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
   });
 
-  const [successMessage, setSuccessMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -25,13 +25,13 @@ export default function ContactPage() {
 
     try {
       /*  */
-      setSuccessMessage("Your message has been sent successfully!");
-      setFormData({ name: "", email: "", subject: "", message: "" });
-      setTimeout(() => setSuccessMessage(""), 5000);
+      setSuccessMessage('Your message has been sent successfully!');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      setTimeout(() => setSuccessMessage(''), 5000);
     } catch (error) {
       console.error(error);
-      setSuccessMessage("Failed to send message. Please try again.");
-      setTimeout(() => setSuccessMessage(""), 5000);
+      setSuccessMessage('Failed to send message. Please try again.');
+      setTimeout(() => setSuccessMessage(''), 5000);
     }
   };
 
@@ -159,7 +159,7 @@ export default function ContactPage() {
               {successMessage && (
                 <div
                   className="fixed bottom-4 left-4 bg-accent text-accent-foreground p-4 rounded shadow-lg cursor-pointer z-50"
-                  onClick={() => setSuccessMessage("")}
+                  onClick={() => setSuccessMessage('')}
                 >
                   {successMessage}
                 </div>

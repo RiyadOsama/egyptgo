@@ -1,18 +1,17 @@
 'use client';
-import BookingForm from "@/components/booking-form";
-import BookingSummary from "@/components/booking-summary";
-import Link from "next/link";
-import { useGetPackageById } from "@/hooks/use-packages";
-import { useParams } from "next/navigation";
-import { useState } from "react";
-
+import BookingForm from '@/components/booking-form';
+import BookingSummary from '@/components/booking-summary';
+import Link from 'next/link';
+import { useGetPackageById } from '@/hooks/use-packages';
+import { useParams } from 'next/navigation';
+import { useState } from 'react';
 
 export default function BookFormPage() {
   const params = useParams();
   const id = params.id;
   const { data, isLoading, isError } = useGetPackageById(id);
   const packageData = data?.data;
-  console.log("Package data in booking summary:", packageData);
+  console.log('Package data in booking summary:', packageData);
   const [totalPrice, setTotalPrice] = useState(0);
 
   return (
@@ -29,7 +28,7 @@ export default function BookFormPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
             <div className="col-span-2">
-              <BookingForm packageData={packageData} totalPrice={totalPrice} setTotalPrice={setTotalPrice}/>
+              <BookingForm packageData={packageData} totalPrice={totalPrice} setTotalPrice={setTotalPrice} />
             </div>
             <div className="col-span-1">
               <BookingSummary packageData={packageData} totalPrice={totalPrice} />

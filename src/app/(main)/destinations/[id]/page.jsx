@@ -1,23 +1,27 @@
-'use client'
-import AvailablePackageCard from "@/components/avilable-pakage-card";
-import Image from "next/image";
-import Link from "next/link";
-import { useGetDestinationById } from "@/hooks/use-destinations";
-import { useParams } from "next/navigation";
+'use client';
+import AvailablePackageCard from '@/components/avilable-pakage-card';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useGetDestinationById } from '@/hooks/use-destinations';
+import { useParams } from 'next/navigation';
 
 export default function DestinationDetailPage() {
   const params = useParams();
   // const { id } = params;
-  const { data: destinationData, isLoading: isDestinationLoading, isError: isDestinationError } = useGetDestinationById(params.id);
+  const {
+    data: destinationData,
+    isLoading: isDestinationLoading,
+    isError: isDestinationError,
+  } = useGetDestinationById(params.id);
   const destination = destinationData?.data || {};
 
-  if(isDestinationLoading){
+  if (isDestinationLoading) {
     return <div className="text-center py-20">Loading...</div>;
   }
-  if(isDestinationError){
+  if (isDestinationError) {
     return <div className="text-center py-20">Error loading destination details.</div>;
   }
-  console.log("Destination data in detail page:", destinationData);
+  console.log('Destination data in detail page:', destinationData);
   return (
     <main className="bg-background">
       <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
@@ -31,10 +35,10 @@ export default function DestinationDetailPage() {
               <span className="text-foreground font-semibold">{destination.name}</span>
             </nav>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">{destination?.name}</h1>
-            <p className="text-lg text-muted-(--foreground) max-w-3xl">
-              {destination.description}
-            </p>
+            <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">
+              {destination?.name}
+            </h1>
+            <p className="text-lg text-muted-(--foreground) max-w-3xl">{destination.description}</p>
           </div>
 
           <div className="mb-12 rounded-lg overflow-hidden shadow-lg relative">
@@ -60,7 +64,7 @@ export default function DestinationDetailPage() {
               <h2 className="text-3xl font-bold text-foreground">Available Packages</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <AvailablePackageCard destinationId = {params.id} destinationImage={destination.image?.url} />
+              <AvailablePackageCard destinationId={params.id} destinationImage={destination.image?.url} />
             </div>
           </div>
         </div>

@@ -1,18 +1,18 @@
 'use client';
-import { useState } from "react";
-import { useRegister } from "@/hooks/use-auth";
-import Link from "next/link";
+import { useState } from 'react';
+import { useRegister } from '@/hooks/use-auth';
+import Link from 'next/link';
 
 export default function SignupPage() {
-  const [userName, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [userName, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const registerMutation = useRegister();
-  const SignupSubmitHandler = (e)=>{
+  const SignupSubmitHandler = (e) => {
     e.preventDefault();
-    registerMutation.mutate({email,userName,password,confirmPassword});
-  }
+    registerMutation.mutate({ email, userName, password, confirmPassword });
+  };
   return (
     <main className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
@@ -28,7 +28,7 @@ export default function SignupPage() {
               className="w-full border border-border p-2 rounded-md"
               placeholder="Enter your name"
               value={userName}
-              onChange={(e)=>setName(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
@@ -42,7 +42,7 @@ export default function SignupPage() {
               className="w-full border border-border p-2 rounded-md"
               placeholder="Enter your email"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -56,7 +56,7 @@ export default function SignupPage() {
               className="w-full border border-border p-2 rounded-md"
               placeholder="Enter your password"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -70,7 +70,7 @@ export default function SignupPage() {
               className="w-full border border-border p-2 rounded-md"
               placeholder="Confirm your password"
               value={confirmPassword}
-              onChange={(e)=>setConfirmPassword(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
 
@@ -79,7 +79,7 @@ export default function SignupPage() {
             className="w-full bg-primary text-primary-foreground p-2 cursor-pointer rounded-md hover:opacity-90 transition duration-300"
             onClick={SignupSubmitHandler}
           >
-            {registerMutation.isPending ? "Loading..." : "Signup"}
+            {registerMutation.isPending ? 'Loading...' : 'Signup'}
           </button>
           <div>
             <Link href="/login" className="text-primary-black hover:underline mt-4 block text-center">

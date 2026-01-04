@@ -1,10 +1,4 @@
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "./ui/select";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 export default function SelectMenu({ destinationsData, value, onChange }) {
   const destinations = destinationsData?.data || [];
@@ -15,7 +9,7 @@ export default function SelectMenu({ destinationsData, value, onChange }) {
         <SelectValue placeholder="Select Destination" />
       </SelectTrigger>
       <SelectContent>
-        {destinations.map(d => {
+        {destinations.map((d) => {
           const itemValue = String(d._id || d.id);
           return (
             <SelectItem key={itemValue} value={itemValue}>

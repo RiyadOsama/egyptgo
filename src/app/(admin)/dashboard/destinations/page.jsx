@@ -1,6 +1,6 @@
-import DestinationCard from "@/components/destination-card";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+import DestinationCard from '@/components/destination-card';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 export default function ManageDestinationsPage() {
   return (

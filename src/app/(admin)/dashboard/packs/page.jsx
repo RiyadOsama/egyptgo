@@ -1,6 +1,6 @@
-import PackageCard from "@/components/package-card";
-import { Plus } from "lucide-react";
-import Link from "next/link";
+import PackageCard from '@/components/package-card';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 export default function AdminPacksPage() {
   return (
