@@ -1,31 +1,18 @@
 'use client';
 
-import { useQueryClient } from '@tanstack/react-query';
 import { useDeleteDestination, useGetAllDestinations } from '@/hooks/use-destinations';
 import Link from 'next/link';
 import { Loader2, MapPin } from 'lucide-react';
 import DestinationCard from '@/components/destination-card';
 
 export default function DestinationList() {
-  const queryClient = useQueryClient();
-
   const { data: destinationData, isLoading, isError } = useGetAllDestinations();
   const deleteMutation = useDeleteDestination();
 
   const destinations = destinationData?.data || [];
 
   const handleDelete = async (id) => {
-    if (!window.confirm('Are you sure you want to delete this destination?')) return;
-
-    deleteMutation.mutate(id, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({ queryKey: ['destinations'] });
-      },
-      onError: (error) => {
-        alert('Error deleting destination. Please try again.');
-        console.error(error);
-      },
-    });
+    deleteMutation.mutate(id);
   };
 
   if (isLoading) {
