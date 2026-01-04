@@ -8,9 +8,8 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-fit p-1 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-primary-foreground font-bold">TWU</span>
+                <span className="text-primary-foreground font-bold">EgyptGo</span>
               </div>
-              <span className="font-bold">Travel With Us</span>
             </div>
             <p className="text-sm opacity-80">Explore ancient wonders and create lasting memories</p>
           </div>
@@ -24,7 +23,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/packages" className="opacity-80 hover:opacity-100">
+                <Link href="/packs" className="opacity-80 hover:opacity-100">
                   Packages
                 </Link>
               </li>
@@ -45,14 +44,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="opacity-80 hover:opacity-100">
+                <Link href="#" className="opacity-80 hover:opacity-100">
                   FAQ
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="opacity-80 hover:opacity-100">
+                <Link href="#" className="opacity-80 hover:opacity-100">
                   Terms
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

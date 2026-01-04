@@ -28,7 +28,7 @@ export default function Header() {
       <nav className="flex items-center justify-between max-w-7xl mx-auto h-16 px-4 md:px-8">
         {/* Logo */}
         <Link href="/" className="font-bold bg-primary text-primary-foreground px-3 py-1 rounded-md">
-          TWU
+          EgyptGo
         </Link>
 
         {/* Links */}
