@@ -20,12 +20,7 @@ export function useGetDestinationById(id){
     return useQuery({
         queryFn:()=>getDestinationById(id),
         queryKey:['destination', id],
-        onSuccess:(data)=>{
-            console.log(`Fetched destination ${id} successfully`, data);
-        },
-        onError:(error)=>{
-            console.error(`Failed to fetch destination ${id}`, error);
-        }
+        enabled:!!id,
     })
 }
 

@@ -10,6 +10,7 @@ export default function DestinationForm({ id }) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  // const [errors, setErrors] = useState({});
   const router = useRouter();
 
   const { data:destination, isLoading, isError } = useGetDestinationById(id);
@@ -26,6 +27,12 @@ export default function DestinationForm({ id }) {
     }
   },[destination])
 
+  const isFormValid =
+  name.trim() !== "" &&
+  description.trim() !== "" &&
+  (id ? true : image !== null);
+
+
   const createDestinationHandler = (e)=>{
     e.preventDefault();
     const formData = new FormData();
@@ -34,7 +41,14 @@ export default function DestinationForm({ id }) {
     if(image){
       formData.append('image',image);
     }
-    createDestinationMutation.mutate(formData);
+    createDestinationMutation.mutate(
+      formData,
+      {
+        onSuccess:()=>{
+          router.push('/dashboard/destinations');
+        }
+      }
+    );
     setName("");
     setDescription("");
     setImage(null);
@@ -107,7 +121,15 @@ export default function DestinationForm({ id }) {
       <button 
         type="submit"
         onClick={id ? editDestinationHandler : createDestinationHandler}
-        className="bg-primary cursor-pointer text-primary-foreground px-4 py-2 rounded-md hover:opacity-90 transition duration-300">
+        className={`
+          bg-primary text-primary-foreground px-4 py-2 rounded-md transition duration-300
+        ${isFormValid
+          ? "cursor-pointer hover:opacity-90"
+          : "cursor-not-allowed opacity-60"
+        }`
+        }
+        disabled={!isFormValid || createDestinationMutation.isLoading || editDestinationMutation.isLoading}
+        >
         {createDestinationMutation.isLoading ? "Creating..." : "Submit"}
       </button>
     </div>

@@ -33,12 +33,7 @@ export function useGetPackageById(id){
     return useQuery({
         queryFn:()=>getPackageById(id),
         queryKey:['package', id],
-        onSuccess:(data)=>{
-            console.log(`Fetched package ${id} successfully`, data);
-        },
-        onError:(error)=>{
-            console.error(`Failed to fetch package ${id}`, error);
-        }
+        enabled:!!id,
     })
 }
 

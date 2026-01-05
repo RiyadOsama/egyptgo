@@ -55,6 +55,15 @@ export default function PackageForm({ id }) {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
 
+  const isFormValid =
+  form.name.trim() !== "" &&
+  form.description.trim() !== "" &&
+  form.duration !== "" &&
+  form.groupSize !== "" &&
+  form.price !== "" &&
+  // form.destinationId !== "" &&
+  (id ? true : form.image !== null);
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -194,7 +203,13 @@ export default function PackageForm({ id }) {
 
         <button
           type="submit"
-          className="py-3 px-3 rounded-xl font-bold active:scale-[0.97] transition-all bg-primary text-primary-foreground cursor-pointer"
+          className={
+            `py-3 px-3 rounded-xl font-bold active:scale-[0.97] transition-all bg-primary text-primary-foreground
+            ${isFormValid
+              ? "cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] hover:opacity-90"
+              : "cursor-not-allowed opacity-60"}
+          `}
+          disabled={!isFormValid || createPackage.isLoading || updatePackage.isLoading}
         >
           {isEdit ? "Update Package" : "Create Package"}
         </button>

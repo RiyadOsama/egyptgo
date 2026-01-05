@@ -7,27 +7,45 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+  const [serverError, setServerError] = useState("");
   const loginMutation = useLogin();
   const router = useRouter();
 
   const LoginSubmitHandler = (e)=>{
     e.preventDefault();
+    const validationErrors = {}
+    if(!email){
+      validationErrors.email = "Email is required.";
+    }
+    if(!password){
+      validationErrors.password = "Password is required.";
+    }
+    if(Object.keys(validationErrors).length > 0){
+      setErrors(validationErrors);
+      setServerError("");
+      return;
+    }
+
+    setErrors({});
+    setServerError("");
+
     loginMutation.mutate(
       {email,password},
       {
         onSuccess:(data)=>{
-          console.log("Login success, redirecting...", email);
-          console.log("Cookies:", document.cookie);
           // Use window.location for full page reload to ensure cookies are sent
           setTimeout(() => {
             if(email.startsWith("admin")){
-              console.log("Redirecting to dashboard");
               window.location.href = '/dashboard';
             }else{
-              console.log("Redirecting to home");
               window.location.href = '/';
             }
           }, 300);
+        },onError:(error)=>{
+          if(error.response?.status === 401){
+            setServerError("Invalid email or password.");
+          }
         }
       }
     );
@@ -50,6 +68,7 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
+            {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
           <div className="mb-6">
@@ -64,9 +83,8 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <Link href="/reset-password" className="text-primary hover:underline mt-4 block">
-              Forgot Password?
-            </Link>
+            {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+            {serverError && <p className="text-red-500 text-sm mt-1">{serverError}</p>}
           </div>
 
           <button
