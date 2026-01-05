@@ -31,7 +31,7 @@ export default function PackageCard({ show = false }) {
   return (
     <>
     {allPackages.map((pkg)=>(
-      <div key={pkg.id} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition w-[350px] bg-card">
+      <div key={pkg.id} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-card">
         <Image
           src={pkg.image.url}
           width={400}

@@ -9,16 +9,16 @@ export default function ReservationCard({ reservation }) {
 
   if(isLoading){
     return (
-      <div className="min-h-screen flex items-center justify-center">
-      <p>Loading...</p>
+      <div className="min-h-[400px] flex items-center justify-center">
+        <p className="text-lg">Loading reservations...</p>
       </div>
     );
   }
 
   if(isError){
     return (
-      <div className="min-h-screen flex items-center justify-center">
-      <p>Error loading Reservations.</p>
+      <div className="min-h-[400px] flex items-center justify-center">
+        <p className="text-lg text-destructive">Error loading reservations.</p>
       </div>
     )
   }

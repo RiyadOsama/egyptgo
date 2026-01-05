@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PersonStanding, LayoutDashboard, PlaneIcon } from "lucide-react";
+import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -23,13 +23,18 @@ const items = [
   },
   {
     title: "Manage Destinations",
-    icon: PersonStanding,
+    icon: LocateIcon,
     href: "/dashboard/destinations",
   },
   {
     title: "Manage Packages",
-    icon: PersonStanding,
+    icon: Package2Icon,
     href: "/dashboard/packs",
+  },
+  {
+    title: "Add New Admin",
+    icon: PersonStanding,
+    href: "/dashboard/create-admin",
   },
 ];
 

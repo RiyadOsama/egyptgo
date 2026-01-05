@@ -201,18 +201,6 @@ export default function ReservationDetailPage() {
             </div>
           </div>
         </div>
-        {/* Action Buttons */}
-        <div className="flex gap-3">
-          <Button className="bg-primary hover:opacity-90 text-primary-foreground">
-            <Mail className="mr-2 h-4 w-4" />
-            Send Confirmation Email
-          </Button>
-          <Button variant="outline">
-            <Phone className="mr-2 h-4 w-4" />
-            Contact Customer
-          </Button>
-          <Button variant="outline">Export PDF</Button>
-        </div>
       </div>
     </div>
   );
