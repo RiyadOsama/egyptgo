@@ -49,12 +49,7 @@ export default function DestinationDetailPage() {
               />
             )}
             <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-            <div className="absolute bottom-4 left-4 text-primary-foreground pointer-events-none">
-              <h3 className="text-lg font-semibold drop-shadow">Nile Sunset — {destination?.name}</h3>
-              <p className="text-sm opacity-90 drop-shadow">Golden hour views and traditional felucca rides</p>
-            </div>
           </div>
-
           <div className="mb-16">
             <div className="flex items-center justify-between mb-6 gap-4">
               <h2 className="text-3xl font-bold text-foreground">Available Packages</h2>

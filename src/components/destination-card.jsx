@@ -33,14 +33,14 @@ export default function DestinationCard({ destination, onDelete, showActions = f
         <div className="mt-auto flex items-center gap-3 p-5 pt-5 border-t border-border/50">
           <Link
             href={`/dashboard/destinations/edit-destination/${destination?._id}`}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-input bg-background px-3 py-2 text-sm font-medium hover:bg-accent transition-colors"
+            className="flex-1 bg-background text-foreground border border-border hover:bg-accent px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium"
           >
             <Edit className="h-4 w-4" /> Edit
           </Link>
           <button
             onClick={() => onDelete?.(destination?._id)}
             disabled={isDeleting}
-            className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-destructive/20 bg-background px-3 py-2 text-sm font-medium text-destructive hover:bg-destructive hover:text-destructive-foreground transition-all disabled:opacity-50"
+            className="flex-1 bg-background text-destructive border border-destructive/20 hover:bg-destructive/10 px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium cursor-pointer"
           >
             <Trash2 className="h-4 w-4" /> {isDeleting ? '...' : 'Delete'}
           </button>

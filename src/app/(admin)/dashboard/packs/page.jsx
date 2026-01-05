@@ -1,8 +1,6 @@
-'use client';
-import PackageCard from "@/components/package-card";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { useGetFullPackages } from "@/hooks/use-packages";
+import PackageList from '@/components/package-list';
+import { Plus } from 'lucide-react';
+import Link from 'next/link';
 
 export default function AdminPacksPage() {
   const { isLoading, isError } = useGetFullPackages();
@@ -34,7 +32,7 @@ export default function AdminPacksPage() {
           </p>
         </div>
         <Link
-          href="/dashboard/destinations/create-destination"
+          href="/dashboard/packs/create-package"
           className="inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold shadow-sm hover:opacity-90 transition-all active:scale-95"
         >
           <Plus className="mr-2 h-5 w-5" />
@@ -43,7 +41,7 @@ export default function AdminPacksPage() {
       </div>
 
       {/* Grid or Empty State */}
-      <PackageCard show />
+      <PackageList />
     </div>
   );
 }

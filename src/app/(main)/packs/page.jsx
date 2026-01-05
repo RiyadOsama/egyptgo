@@ -1,8 +1,8 @@
-"use client";
-import { allPackages } from "@/lib/mock-data";
-import { useState } from "react";
-import Link from "next/link";
-import { useGetFullPackages } from "@/hooks/use-packages";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useGetFullPackages } from '@/hooks/use-packages';
+import { ChevronDown } from 'lucide-react';
 
 export default function Packages() {
   const [sortBy, setSortBy] = useState("name");
@@ -17,24 +17,31 @@ export default function Packages() {
   });
   return (
     <>
-      <main className="min-h-screen">
-        <section className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-background">
-          <div className="max-w-7xl mx-auto">
-            <div className="mb-8">
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">All Packages</h1>
-              <p className="text-lg text-muted-foreground mb-6">Browse all available packages across Egypt</p>
+      <main className="bg-background">
+        <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
+          <div>
+            <div className="flex justify-between items-center mb-12">
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4">All Packages</h1>
+                <p className="text-lg text-muted-(--foreground) max-w-2xl">
+                  Browse all available packages across Egypt
+                </p>
+              </div>
 
-              <div className="flex items-center gap-4">
-                <label className="text-foreground font-medium">Sort by:</label>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="px-4 py-2 border border-border rounded-lg bg-card text-foreground"
-                >
-                  <option value="name">Name</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
-                </select>
+              <div className="flex items-center gap-3 bg-card p-2 rounded-xl border border-border shadow-sm">
+                <label className="text-sm font-semibold text-muted-foreground ml-2 whitespace-nowrap">Sort by:</label>
+                <div className="relative">
+                  <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                    className="appearance-none pl-3 pr-10 py-2 bg-card text-sm font-medium text-foreground focus:outline-none cursor-pointer"
+                  >
+                    <option value="name">Name</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none" />
+                </div>
               </div>
             </div>
 
