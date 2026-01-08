@@ -3,23 +3,6 @@ import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPacksPage() {
-  const { isLoading, isError } = useGetFullPackages();
-  
-  if(isLoading){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg">Loading packages...</p>
-      </div>
-    );
-  }
-  
-  if(isError){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg text-destructive">Error loading packages.</p>
-      </div>
-    );
-  }
   
   return (
     <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 w-full">

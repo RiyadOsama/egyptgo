@@ -13,7 +13,6 @@ export default function PackageList() {
   const packages = packageData?.data || [];
 
   const handleDelete = async (id) => {
-
     deleteMutation.mutate(id);
   };
 
