@@ -1,48 +1,27 @@
-'use client';
-import DestinationCard from "@/components/destination-card";
-import { Plus } from "lucide-react";
-import Link from "next/link";
-import { useGetAllDestinations } from "@/hooks/use-destinations";
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
+import DestinationList from '@/components/destination-list';
 
 export default function ManageDestinationsPage() {
-  const { isLoading, isError } = useGetAllDestinations();
-  
-  if(isLoading){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg">Loading destinations...</p>
-      </div>
-    );
-  }
-  
-  if(isError){
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-lg text-destructive">Error loading destinations.</p>
-      </div>
-    );
-  }
-  
   return (
-    <div className="py-10 px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+    <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 w-full">
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b pb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-6">Manage Destinations</h1>
-          <p className="mb-4">Here you can add, edit, or remove travel destinations.</p>
+          <h1 className="text-4xl font-extrabold tracking-tight text-foreground">Manage Destinations</h1>
+          <p className="text-lg text-muted-foreground mt-2">View, edit, and organize your travel catalog.</p>
         </div>
-        <div className="w-fit">
-          <Link
-            href="/dashboard/destinations/create-destination"
-            className="bg-primary text-primary-foreground hover:opacity-90 hover:text-primary-foreground font-semibold rounded-lg py-2 px-4 flex items-center"
-          >
-            <Plus className="mr-2 h-4 w-4" />
-            Create
-          </Link>
-        </div>
+        <Link
+          href="/dashboard/destinations/create-destination"
+          className="inline-flex items-center justify-center bg-primary text-primary-foreground px-6 py-3 rounded-xl font-bold shadow-sm hover:opacity-90 transition-all active:scale-95"
+        >
+          <Plus className="mr-2 h-5 w-5" />
+          Add Destination
+        </Link>
       </div>
-      <div className="py-10 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <DestinationCard show />
-      </div>
+
+      {/* Grid or Empty State */}
+      <DestinationList />
     </div>
   );
 }

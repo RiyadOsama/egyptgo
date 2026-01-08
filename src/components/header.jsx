@@ -29,7 +29,7 @@ export default function Header() {
         
         {/* Logo */}
         <Link href="/" className="font-bold bg-primary text-primary-foreground px-3 py-1 rounded-md">
-          TWU
+          EgyptGo
         </Link>
 
         {/* Links */}

@@ -1,77 +1,55 @@
 'use client';
-import Image from "next/image";
-import img from "../../public/istockphoto-466090186-612x612.jpg";
-import Link from "next/link";
-import { Edit, Delete, Calendar } from "lucide-react";
-import { useGetFullPackages } from "@/hooks/use-packages";
-import { useDeletePackage } from "@/hooks/use-packages";
 
-export default function PackageCard({ show = false }) {
-    const { data , isLoading, isError } = useGetFullPackages();
-    const deletePackageMutation = useDeletePackage();
-    const allPackages = data?.data || [];
-    console.log("All packages data:", allPackages);
-    if(isLoading){
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-            <p>Loading...</p>
-            </div>
-        );
-      } 
-      if(isError){
-        return (
-            <div className="min-h-screen flex items-center justify-center">
-            <p>Error loading Packages.</p>
-            </div>
-        )
-      }
-      const deletePackageHandler = (id)=>{
-        deletePackageMutation.mutate(id);
-      }
+import Image from 'next/image';
+import Link from 'next/link';
+import { Edit, Trash2, Calendar } from 'lucide-react';
+
+export default function PackageCard({ pkg, onDelete, showActions = false }) {
   return (
-    <>
-    {allPackages.map((pkg)=>(
-      <div key={pkg.id} className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-card">
+    <div className="rounded-xl overflow-hidden shadow-sm border border-border bg-card hover:shadow-md transition-all flex flex-col h-full">
+      <div className="relative h-48 w-full">
         <Image
-          src={pkg.image.url}
-          width={400}
-          height={300}
+          src={pkg.image?.url || 'https://placehold.co/600x400?text=No+Image'}
+          fill
           alt={pkg.name}
-          className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
+          className="object-cover hover:scale-105 transition-transform duration-500"
         />
-        <div className="p-4">
-          <h3 className="text-xl font-semibold mb-2">{pkg.name}</h3>
-          <p className="text-muted-foreground mb-4 ">{pkg.destinationName}</p>
-        </div>
-        <div className="flex items-center justify-between p-2">
-          <div className="flex items-center">
-            <Calendar className="ml-2 h-4 w-4 text-muted-foreground" />
-            <p className="ml-2">{pkg.duration} Days</p>
+      </div>
+
+      <div className="p-5 flex-1 flex flex-col">
+        <h3 className="text-xl font-bold mb-1 text-foreground">{pkg.name}</h3>
+        <p className="text-sm text-muted-foreground mb-4">{pkg.destinationName}</p>
+
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center text-sm font-medium">
+            <Calendar className="h-4 w-4 text-primary mr-2" />
+            <span>{pkg.duration} Days</span>
           </div>
-          <p className="px-4 py-2 text-primary">${pkg.price}</p>
+          <p className="font-bold text-primary">${pkg.price}</p>
         </div>
-        <div>
-          <p className="text-muted-foreground mb-4 p-4">
-            {pkg.description}
-          </p>
-        </div>
-        {show && (
-          <div className="flex w-full justify-between">
+
+        <p className="text-muted-foreground text-sm line-clamp-3 mb-6 flex-1">{pkg.description}</p>
+
+        {showActions && (
+          <div className="flex gap-3 pt-4 border-t border-border mt-auto">
             <Link
-              href={`/dashboard/packs/edit-package/${pkg.id}`}
-              className="bg-card text-card-foreground hover:opacity-90 px-1 py-1 transition duration-300 rounded-md mx-4 mb-4 flex items-center border w-[100px] justify-center"
+              href={`/dashboard/packs/edit-package/${pkg._id}`}
+              className="flex-1 bg-background text-foreground border border-border hover:bg-accent px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium"
             >
-              <Edit className="mr-3 h-4 w-4" />
+              <Edit className="mr-2 h-4 w-4" />
               Edit
             </Link>
-            <button type="submit" onClick={()=>deletePackageHandler(pkg.id)} className="cursor-pointer px-2 py-1 transition duration-300 rounded-md text-card-foreground hover:opacity-90 mx-4 mb-4 border flex items-center w-[100px] justify-center">
-              <Delete className="mr-3 h-4 w-4 text-destructive" />
+            <button
+              type="button"
+              onClick={() => onDelete?.(pkg._id)}
+              className="flex-1 bg-background text-destructive border border-destructive/20 hover:bg-destructive/10 px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium cursor-pointer"
+            >
+              <Trash2 className="mr-2 h-4 w-4" />
               Delete
             </button>
           </div>
         )}
       </div>
-    ))}
-    </>
+    </div>
   );
 }

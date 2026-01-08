@@ -54,16 +54,20 @@ export default function SignupPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
-        <form className="bg-card p-6 rounded-lg shadow-md">
+        <form onSubmit={SignupSubmitHandler} className="bg-card p-6 rounded-lg shadow-md border border-border">
           <h1 className="text-3xl font-bold mb-6 text-center">Signup</h1>
+
+          {/* Name Input */}
           <div className="mb-4">
-            <label htmlFor="name" className="block text-foreground font-semibold mb-2">
+            <label htmlFor="userName" className="block text-foreground font-semibold mb-2">
               Name
             </label>
             <input
               type="text"
-              id="name"
-              className="w-full border border-border p-2 rounded-md"
+              id="userName"
+              name="userName"
+              required
+              className="w-full border border-border p-2 rounded-md bg-background"
               placeholder="Enter your name"
               value={userName}
               onChange={(e)=>setName(e.target.value)}
@@ -71,6 +75,7 @@ export default function SignupPage() {
             {errors.userName && <p className="text-red-500 text-sm mt-1">{errors.userName}</p>}
           </div>
 
+          {/* Email Input */}
           <div className="mb-4">
             <label htmlFor="email" className="block text-foreground font-semibold mb-2">
               Email
@@ -78,7 +83,9 @@ export default function SignupPage() {
             <input
               type="email"
               id="email"
-              className="w-full border border-border p-2 rounded-md"
+              name="email"
+              required
+              className="w-full border border-border p-2 rounded-md bg-background"
               placeholder="Enter your email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
@@ -86,6 +93,7 @@ export default function SignupPage() {
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
 
+          {/* Password Input */}
           <div className="mb-6">
             <label htmlFor="password" className="block text-foreground font-semibold mb-2">
               Password
@@ -93,7 +101,9 @@ export default function SignupPage() {
             <input
               type="password"
               id="password"
-              className="w-full border border-border p-2 rounded-md"
+              name="password"
+              required
+              className="w-full border border-border p-2 rounded-md bg-background"
               placeholder="Enter your password"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
@@ -101,14 +111,17 @@ export default function SignupPage() {
             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
           </div>
 
+          {/* Confirm Password Input */}
           <div className="mb-6">
-            <label htmlFor="confirm-password" className="block text-foreground font-semibold mb-2">
+            <label htmlFor="confirmPassword" className="block text-foreground font-semibold mb-2">
               Password Confirmation
             </label>
             <input
               type="password"
-              id="confirm-password"
-              className="w-full border border-border p-2 rounded-md"
+              id="confirmPassword"
+              name="confirmPassword"
+              required
+              className="w-full border border-border p-2 rounded-md bg-background"
               placeholder="Confirm your password"
               value={confirmPassword}
               onChange={(e)=>setConfirmPassword(e.target.value)}

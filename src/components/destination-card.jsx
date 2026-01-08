@@ -1,57 +1,51 @@
-'use client'
-import Image from "next/image";
-import Link from "next/link";
-import { Edit, Delete } from "lucide-react";
-import { useGetAllDestinations } from "@/hooks/use-destinations";
-import { useDeleteDestination } from "@/hooks/use-destinations";
+'use client';
 
-export default function DestinationCard({ show = false }) {
-  const { data, isLoading, isError } = useGetAllDestinations();
-  console.log("Destinations data in card:", data);
-  const deleteDestinationMutation = useDeleteDestination();
-  
-  const destinations = data?.data || [];
+import Image from 'next/image';
+import Link from 'next/link';
+import { Edit, Trash2 } from 'lucide-react';
 
-  const deleteDestinationHandler = (id) => {
-    deleteDestinationMutation.mutate(id);
-  }
-  
-  return (
+export default function DestinationCard({ destination, onDelete, showActions = false, isDeleting = false }) {
+  const CardContent = (
     <>
-    {destinations.map((destination) => (
-    <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition bg-card"
-    key={destination._id}>
-          <Image
-            src={destination?.image.url}
-            width={400}
-            height={300}
-            alt="Cairo"
-            className="w-full h-48 object-cover hover:scale-105 transition-transform duration-300"
-          />
-          <div className="p-4 mt-4">
-            <h3 className="text-xl font-semibold mb-2">{destination?.name}</h3>
-            <p className="text-muted-foreground mb-4">
-              {destination?.description}
-            </p>
-            <p className="text-muted-foreground mb-4">middle of Egypt</p>
-          </div>
-      {show && (
-        <div className="flex w-full justify-between">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+        <Image
+          src={destination?.image?.url || 'https://placehold.co/600x400?text=No+Image'}
+          alt={destination?.name || 'Destination'}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300" />
+      </div>
+
+      <div className="flex flex-col flex-grow p-5">
+        <h3 className="text-xl font-bold tracking-tight text-foreground line-clamp-1">{destination?.name}</h3>
+        <p className="text-muted-foreground text-sm line-clamp-3 leading-relaxed mb-6">{destination?.description}</p>
+      </div>
+    </>
+  );
+
+  return (
+    <div className="group flex flex-col h-full rounded-xl overflow-hidden border bg-card shadow-sm hover:shadow-md transition-all duration-300">
+      {showActions ? <div>{CardContent}</div> : <Link href={`/destinations/${destination?._id}`}>{CardContent}</Link>}
+
+      {showActions && (
+        <div className="mt-auto flex items-center gap-3 p-5 pt-5 border-t border-border/50">
           <Link
-            href={`/dashboard/destinations/edit-destination/${destination._id}`}
-            className="bg-card text-card-foreground hover:opacity-90 px-1 py-1 transition duration-300 rounded-md mx-4 mb-4 flex items-center border w-[100px] justify-center"
+            href={`/dashboard/destinations/edit-destination/${destination?._id}`}
+            className="flex-1 bg-background text-foreground border border-border hover:bg-accent px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium"
           >
-            <Edit className="mr-3 h-4 w-4" />
-            Edit
+            <Edit className="h-4 w-4" /> Edit
           </Link>
-          <button type="submit" onClick={()=>deleteDestinationHandler(destination._id)} className="cursor-pointer px-2 py-1 transition duration-300 rounded-md text-card-foreground hover:opacity-90 mx-4 mb-4 border flex items-center w-[100px] justify-center">
-            <Delete className="mr-3 h-4 w-4 text-destructive" />
-            Delete
+          <button
+            onClick={() => onDelete?.(destination?._id)}
+            disabled={isDeleting}
+            className="flex-1 bg-background text-destructive border border-destructive/20 hover:bg-destructive/10 px-3 py-2 transition rounded-lg flex items-center justify-center text-sm font-medium cursor-pointer"
+          >
+            <Trash2 className="h-4 w-4" /> {isDeleting ? '...' : 'Delete'}
           </button>
         </div>
       )}
     </div>
-    ))}
-    </>
   );
 }

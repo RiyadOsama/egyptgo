@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon } from "lucide-react";
+import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon,Home } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -16,6 +16,7 @@ import { usePathname } from "next/navigation";
 import LogoutButton from "./logout.button";
 
 const items = [
+  { title: 'Home', icon: Home, href: '/' },
   {
     title: "Dashboard",
     icon: LayoutDashboard,
@@ -45,7 +46,7 @@ export default function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="px-6 py-4 flex flex-row items-center gap-2">
         <PlaneIcon className="w-8 h-8 text-primary" />
-        <h2 className="text-xl font-semibold">TWU</h2>
+        <h2 className="text-xl font-semibold">EgyptGo</h2>
       </SidebarHeader>
       <SidebarContent>
         <SidebarGroup>
