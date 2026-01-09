@@ -86,7 +86,7 @@ export default function PackageDetailPage() {
               </div>
 
               <div>
-                <div className="bg-linear-to-r from-primary via-accent to-primary rounded-lg p-8 text-primary-foreground sticky top-24">
+                <div className="bg-linear-to-r from-primary to-primary rounded-lg p-8 text-primary-foreground sticky top-24">
                   <div className="mb-8">
                     <p className="text-sm opacity-90 mb-2">Total Price</p>
                     <p className="text-4xl font-bold">${packageData.price}</p>
@@ -101,7 +101,7 @@ export default function PackageDetailPage() {
 
                   <button
                     onClick={() => router.back()}
-                    className="w-full border-2 border-card text-card-foreground font-semibold py-3 rounded-lg hover:bg-muted transition"
+                    className="w-full border-2 border-card text-white font-semibold py-3 rounded-lg hover:bg-muted/70 transition"
                   >
                     View Other Packages
                   </button>

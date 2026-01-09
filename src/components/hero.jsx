@@ -21,13 +21,13 @@ export default function Hero() {
           <div className="flex gap-4 pt-4">
             <Link
               href="/destinations"
-              className="bg-card text-primary font-semibold px-8 py-3 rounded-lg hover:shadow-lg transition"
+              className="bg-card text-primary font-semibold px-5 md:px-8 py-3 rounded-lg hover:shadow-lg transition duration-300"
             >
               Explore Destinations
             </Link>
             <Link
               href="/packs"
-              className="border-2 border-card text-card-foreground font-semibold px-8 py-3 rounded-lg hover:bg-muted transition"
+              className="border-2 border-card text-white px-5 font-semibold md:px-8 py-3 rounded-lg hover:bg-muted/60 transition duration-300"
             >
               View All Packages
             </Link>

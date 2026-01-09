@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon,Home } from "lucide-react";
+import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -16,7 +16,6 @@ import { usePathname } from "next/navigation";
 import LogoutButton from "./logout.button";
 
 const items = [
-  { title: 'Home', icon: Home, href: '/' },
   {
     title: "Dashboard",
     icon: LayoutDashboard,

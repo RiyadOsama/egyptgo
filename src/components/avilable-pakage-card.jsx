@@ -6,7 +6,9 @@ import Link from "next/link";
 export default function AvailablePackageCard({destinationId, destinationImage}) {
   const { data:packagesData, isLoading, isError } = useGetAllPackages(destinationId);
   const packages = packagesData?.data || [];
-  console.log("Packages data in available package card:", packages);
+  if(isLoading){
+    return <div className="text-center py-20">Loading...</div>;
+  }
   return (
     <>
     {packages.map((pkg)=>(

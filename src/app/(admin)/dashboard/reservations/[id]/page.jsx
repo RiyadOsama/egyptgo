@@ -7,28 +7,6 @@ import { useGetUserById } from "@/hooks/use-user";
 import { useGetPackageById } from "@/hooks/use-packages";
 import { useParams } from "next/navigation";
 
-const mockReservation = {
-  id: 1,
-  customerName: "John Smith",
-  email: "john.smith@email.com",
-  phone: "+1 (555) 123-4567",
-  packageName: "Tropical Paradise - Bali",
-  destination: "Bali, Indonesia",
-  bookingDate: "2024-12-10",
-  travelDate: "2025-01-15",
-  returnDate: "2025-01-22",
-  guests: 2,
-  totalPrice: "$2,499",
-  status: "confirmed",
-  paymentMethod: "Credit Card",
-  specialRequests: "Vegetarian meals, Early check-in if possible",
-  packageDetails: {
-    duration: 7,
-    activities: ["Beach relaxation", "Temple tours", "Surfing lessons", "Spa treatments"],
-    accommodation: "5-star beachfront resort",
-    mealsIncluded: "Breakfast & Dinner",
-  },
-};
 
 export default function ReservationDetailPage() {
   const params = useParams();
@@ -59,7 +37,6 @@ export default function ReservationDetailPage() {
     <div>
       <h1 className="text-2xl font-bold mb-4">Reservation Details</h1>
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Customer Information */}
         <div className="bg-card rounded-md p-4 shadow-sm border ">
           <div className="mb-4">
             <div className="flex items-center gap-2">
@@ -80,13 +57,6 @@ export default function ReservationDetailPage() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground">Phone Number</p>
-              <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-muted-foreground" />
-                {/* <p className="text-base">{mockReservation.phone}</p> */}
-              </div>
-            </div>
-            <div>
               <p className="text-sm text-muted-foreground">Number of Guests</p>
               <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-muted-foreground" />
@@ -95,8 +65,6 @@ export default function ReservationDetailPage() {
             </div>
           </div>
         </div>
-
-        {/* Booking Information */}
         <div className="bg-card rounded-md p-4 shadow-sm border">
           <div className="mb-4">
             <div className="flex items-center gap-2">
@@ -110,21 +78,12 @@ export default function ReservationDetailPage() {
               <p className="text-base font-medium">{formattedDate}</p>
             </div>
             <div>
-              {/* <p className="text-sm text-muted-foreground">Travel Date</p> */}
-              {/* <p className="text-base font-medium">{mockReservation.travelDate}</p> */}
-            </div>
-            <div>
-              {/* <p className="text-sm text-muted-foreground">Return Date</p> */}
-              {/* <p className="text-base font-medium">{mockReservation.returnDate}</p> */}
-            </div>
-            <div>
               <p className="text-sm text-muted-foreground">Duration</p>
               <p className="text-base font-medium">{packageData?.data.duration} days</p>
             </div>
           </div>
         </div>
 
-        {/* Package Details */}
         <div className="lg:col-span-2 bg-card rounded-md p-4 shadow-sm border ">
           <div className="mb-4">
             <div className="flex items-center gap-2">
@@ -135,13 +94,6 @@ export default function ReservationDetailPage() {
           </div>
           <div className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2">
-              <div>
-                <p className="text-sm text-muted-foreground">Destination</p>
-                <div className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-muted-foreground" />
-                  <p className="text-base font-medium">{mockReservation.destination}</p>
-                </div>
-              </div>
               <div>
                 <p className="text-sm text-muted-foreground">Accommodation</p>
                 <p className="text-base font-medium">5-star beachfront resort</p>
@@ -176,7 +128,6 @@ export default function ReservationDetailPage() {
           </div>
         </div>
 
-        {/* Payment Information */}
         <div className="lg:col-span-2 bg-card rounded-md p-4 shadow-sm border ">
           <div className="mb-4">
             <div className="flex items-center gap-2">
@@ -187,15 +138,15 @@ export default function ReservationDetailPage() {
           <div className="space-y-4">
             <div className="grid gap-4 md:grid-cols-3">
               <div>
-                <p className="text-sm text-muted-foreground">Payment Method</p>
+                <p className="text-sm text-muted-foreground mb-0.5">Payment Method</p>
                 <p className="text-base font-medium">Credit Card</p>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Payment Status</p>
+                <p className="text-sm text-muted-foreground mb-0.5">Payment Status</p>
                 <div className="bg-green-500 text-accent-foreground hover:opacity-90 w-fit px-1 rounded-sm">Paid</div>
               </div>
               <div>
-                <p className="text-sm text-muted-foreground">Total Amount</p>
+                <p className="text-sm text-muted-foreground mb-0.5">Total Amount</p>
                 <p className="text-xl font-bold text-primary">{reservation?.data.totalPrice}</p>
               </div>
             </div>

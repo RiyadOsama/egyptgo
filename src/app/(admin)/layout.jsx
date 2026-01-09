@@ -2,6 +2,7 @@
 import AppSidebar from "@/components/app-sidebar";
 import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
 
+
 export default function Layout({ children }) {
   return (
     <SidebarProvider defaultOpen={true}>
