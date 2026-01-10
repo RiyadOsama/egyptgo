@@ -32,7 +32,6 @@ export default function LoginPage() {
       {email,password},
       {
         onSuccess:(data)=>{
-          // Use window.location for full page reload to ensure cookies are sent
           setTimeout(() => {
             if(email.startsWith("admin")){
               window.location.href = '/dashboard';

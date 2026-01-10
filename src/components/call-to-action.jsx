@@ -11,7 +11,7 @@ export default function CallToAction() {
           Browse our curated packages and start planning your trip to the land of pharaohs
         </p>
         <Link
-          href="/packages"
+          href="/packs"
           className="inline-block bg-card text-primary font-semibold px-8 py-3 rounded-lg hover:shadow-lg transition mt-6"
         >
           Browse Packages Now

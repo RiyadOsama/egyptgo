@@ -10,7 +10,6 @@ export default function DestinationForm({ id }) {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
-  // const [errors, setErrors] = useState({});
   const router = useRouter();
 
   const { data:destination, isLoading, isError } = useGetDestinationById(id);
