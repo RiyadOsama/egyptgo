@@ -2,11 +2,11 @@ import "./globals.css";
 import Providers from "@/components/providers";
 
 export const metadata = {
-  title: "Admin Dashboard",
+  title: "EgyptGo",
   icons:{
-    icon: "./favicon.svg"
+    icon: "/favicon.svg"
   },
-  description: "Admin dashboard application",
+  description: "Egypt travel and tourism platform",
 };
 
 
