@@ -21,7 +21,6 @@ export default function AdminPacksPage() {
           Add Package
         </Link>
       </div>
-
       <PackageList />
     </div>
   );

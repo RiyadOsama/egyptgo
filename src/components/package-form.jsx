@@ -15,8 +15,9 @@ import { useGetAllDestinations } from "@/hooks/use-destinations";
 export default function PackageForm({ id }) {
   const router = useRouter();
   const isEdit = Boolean(id);
+  console.log(id)
 
-  const { data: packageData } = useGetPackageById(id, { enabled: isEdit });
+  const { data: packageData } = useGetPackageById(id);
   const { data: destinationsData } = useGetAllDestinations();
 
   const createPackage = useCreatePackage();
