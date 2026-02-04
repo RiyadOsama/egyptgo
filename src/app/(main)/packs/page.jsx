@@ -7,11 +7,5 @@ export default async function Packages({ searchParams }) {
 
   const { packages, totalPages } = await getPackages(currentPage, 3);
 
-  return (
-    <PackagesClient
-      packages={packages}
-      totalPages={totalPages}
-      currentPage={currentPage}
-    />
-  );
+  return <PackagesClient packages={packages} totalPages={totalPages} currentPage={currentPage} />;
 }

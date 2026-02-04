@@ -3,7 +3,6 @@ import { Plus } from 'lucide-react';
 import Link from 'next/link';
 
 export default function AdminPacksPage() {
-  
   return (
     <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 w-full">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10 border-b pb-8">

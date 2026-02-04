@@ -1,63 +1,54 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { ChevronDown, CheckCircle2 } from "lucide-react";
-import { useCreateBooking } from "@/hooks/use-bookings";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { useState, useEffect } from 'react';
+import { ChevronDown, CheckCircle2 } from 'lucide-react';
+import { useCreateBooking } from '@/hooks/use-bookings';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
-export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
-  useEffect(()=>{
-    if(packageData?.price){
-      setTotalPrice(packageData.price)
+export default function BookingForm({ packageData, totalPrice, setTotalPrice }) {
+  useEffect(() => {
+    if (packageData?.price) {
+      setTotalPrice(packageData.price);
     }
-  },[packageData])
+  }, [packageData]);
   const [guests, setGuests] = useState(1);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [errors, setErrors] = useState({});
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   const [bookingDetails, setBookingDetails] = useState(null);
   const createBookingMutation = useCreateBooking();
   const isFormValid =
-    name.trim() !== "" &&
+    name.trim() !== '' &&
     /^[a-zA-Z\s]+$/.test(name) &&
-    email.trim() !== "" &&
+    email.trim() !== '' &&
     /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) &&
-    phone.trim() !== "" &&
+    phone.trim() !== '' &&
     /^\+?[1-9]\d{1,14}$/.test(phone);
-  const bookingSubmitHandler =(e)=>{
+  const bookingSubmitHandler = (e) => {
     e.preventDefault();
-    const validationErrors = {}
+    const validationErrors = {};
     const nameRegex = /^[a-zA-Z\s]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const phoneRegex = /^\+?[1-9]\d{1,14}$/;
 
-    if(!name){
-      validationErrors.name = "Full name is required.";
+    if (!name) {
+      validationErrors.name = 'Full name is required.';
+    } else if (!nameRegex.test(name)) {
+      validationErrors.name = 'Full name can only contain letters and spaces.';
     }
-    else if(!nameRegex.test(name)){
-      validationErrors.name = "Full name can only contain letters and spaces.";
+    if (!email) {
+      validationErrors.email = 'Email is required.';
+    } else if (!emailRegex.test(email)) {
+      validationErrors.email = 'Invalid email format.';
     }
-    if(!email){
-      validationErrors.email = "Email is required.";
+    if (!phone) {
+      validationErrors.phone = 'Phone number is required.';
+    } else if (!phoneRegex.test(phone)) {
+      validationErrors.phone = 'Invalid phone number format.';
     }
-    else if(!emailRegex.test(email)){
-      validationErrors.email = "Invalid email format.";
-    }
-    if(!phone){
-      validationErrors.phone = "Phone number is required.";
-    }
-    else if(!phoneRegex.test(phone)){
-      validationErrors.phone = "Invalid phone number format.";
-    }
-    if(Object.keys(validationErrors).length > 0){
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
@@ -68,10 +59,10 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
       numberOfPeople: guests,
       totalPrice: totalPrice,
       contact: {
-        name:name,
-        email:email,
-        phone:phone
-      }
+        name: name,
+        email: email,
+        phone: phone,
+      },
     };
 
     createBookingMutation.mutate(bookingData, {
@@ -81,27 +72,23 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
           email,
           guests,
           packageName: packageData?.name,
-          totalPrice
+          totalPrice,
         });
         setShowSuccessDialog(true);
-        setName("");
-        setEmail("");
-        setPhone("");
+        setName('');
+        setEmail('');
+        setPhone('');
         setGuests(1);
         setTotalPrice(packageData?.price || 0);
-      }
-    })
-  }
+      },
+    });
+  };
 
   return (
     <div className="mx-auto rounded-3xl shadow-sm dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] dark:border-gray-700 border border-border overflow-hidden bg-card">
       <div className="p-8 border-b border-border bg-background">
-        <h1 className="text-2xl font-bold tracking-tight text-foreground">
-          Complete Your Booking
-        </h1>
-        <p className="text-sm mt-1 text-muted-foreground">
-          Provide your details to secure your reservation.
-        </p>
+        <h1 className="text-2xl font-bold tracking-tight text-foreground">Complete Your Booking</h1>
+        <p className="text-sm mt-1 text-muted-foreground">Provide your details to secure your reservation.</p>
       </div>
 
       <form className="p-8 space-y-6">
@@ -115,7 +102,7 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
             placeholder="John Doe"
             className="w-full rounded-xl px-4 py-3 text-sm bg-background text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm hover:shadow-md transition-shadow"
             value={name}
-            onChange={(e)=>setName(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
           />
           {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
         </div>
@@ -130,7 +117,7 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
               placeholder="john@example.com"
               className="w-full rounded-xl px-4 py-3 text-sm bg-background text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm hover:shadow-md transition-shadow"
               value={email}
-              onChange={(e)=>setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
           </div>
@@ -144,7 +131,7 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
               placeholder="+1 (555) 000-0000"
               className="w-full rounded-xl px-4 py-3 text-sm bg-background text-foreground border border-border focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm hover:shadow-md transition-shadow"
               value={phone}
-              onChange={(e)=>setPhone(e.target.value)}
+              onChange={(e) => setPhone(e.target.value)}
             />
             {errors.phone && <p className="text-red-500 text-sm mt-1">{errors.phone}</p>}
           </div>
@@ -155,13 +142,18 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
               Guests
             </label>
             <div className="relative">
-              <select value={guests} onChange={(e)=>{
-                setGuests(Number(e.target.value))
-                setTotalPrice(packageData.price * Number(e.target.value))
-                }} id="guests" className="w-full rounded-xl px-4 py-3 text-sm bg-background text-foreground border border-border appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm hover:shadow-md transition-shadow">
-                {Array.from({ length: packageData?.groupSize }, (_, i) => i + 1).map(n => (
+              <select
+                value={guests}
+                onChange={(e) => {
+                  setGuests(Number(e.target.value));
+                  setTotalPrice(packageData.price * Number(e.target.value));
+                }}
+                id="guests"
+                className="w-full rounded-xl px-4 py-3 text-sm bg-background text-foreground border border-border appearance-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring focus:border-ring shadow-sm hover:shadow-md transition-shadow"
+              >
+                {Array.from({ length: packageData?.groupSize }, (_, i) => i + 1).map((n) => (
                   <option key={n} value={n}>
-                    {n} {n === 1 ? "Guest" : "Guests"}
+                    {n} {n === 1 ? 'Guest' : 'Guests'}
                   </option>
                 ))}
               </select>
@@ -174,11 +166,12 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
           onClick={bookingSubmitHandler}
           className={`
             w-full py-4 rounded-xl font-bold mt-4 transition-all
-            ${isFormValid
-              ? "bg-primary text-primary-foreground cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] active:scale-[0.97]"
-              : "bg-muted text-muted-foreground cursor-not-allowed opacity-60"}`
-            }          
-              disabled={!isFormValid || createBookingMutation.isPending}
+            ${
+              isFormValid
+                ? 'bg-primary text-primary-foreground cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] active:scale-[0.97]'
+                : 'bg-muted text-muted-foreground cursor-not-allowed opacity-60'
+            }`}
+          disabled={!isFormValid || createBookingMutation.isPending}
         >
           Confirm My Booking
         </button>
@@ -192,14 +185,12 @@ export default function BookingForm({packageData,totalPrice,setTotalPrice}) {
                 <CheckCircle2 className="h-12 w-12 text-green-600 dark:text-green-400" />
               </div>
             </div>
-            <DialogTitle className="text-center text-2xl">
-              Booking Confirmed! 🎉
-            </DialogTitle>
+            <DialogTitle className="text-center text-2xl">Booking Confirmed! 🎉</DialogTitle>
             <DialogDescription className="text-center pt-2">
               Thank you for your booking. Have a wonderful trip!
             </DialogDescription>
           </DialogHeader>
-          
+
           <div className="mt-4 space-y-3 rounded-lg bg-muted/50 p-4">
             <div className="flex justify-between text-sm">
               <span className="text-muted-foreground">Name:</span>

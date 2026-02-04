@@ -1,4 +1,4 @@
-import PackageForm from "@/components/package-form";
+import PackageForm from '@/components/package-form';
 
 export default async function EditPackagePage({ params }) {
   const { id } = await params;

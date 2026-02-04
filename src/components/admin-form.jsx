@@ -1,55 +1,48 @@
-'use client'
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { useState, useEffect } from "react";
-import { useCreateUser } from "@/hooks/use-user";
-import { useRouter } from "next/navigation";
+'use client';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
+import { useState, useEffect } from 'react';
+import { useCreateUser } from '@/hooks/use-user';
+import { useRouter } from 'next/navigation';
 
 export default function AdminForm() {
-  const [userName, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [userName, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const router = useRouter();
 
   const createUser = useCreateUser();
 
+  const isFormValid = userName.trim() !== '' && email.trim() !== '' && email.includes('@') && password.trim() !== '';
 
-  const isFormValid =
-  userName.trim() !== "" &&
-  (email.trim() !== "" && email.includes("@")) &&
-  password.trim() !== "";
-
-
-  const createUserHandler = (e)=>{
+  const createUserHandler = (e) => {
     e.preventDefault();
-    let role = "admin";
-    
+    let role = 'admin';
+
     createUser.mutate(
-      {userName, email, password, role },
+      { userName, email, password, role },
       {
-        onSuccess:()=>{
+        onSuccess: () => {
           router.push('/dashboard');
-        }
-      }
+        },
+      },
     );
-    setName("");
-    setEmail("");
-    setPassword("");
-  }
-
-
+    setName('');
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <div>
       <div className="grid gap-2 mb-4">
         <Label htmlFor="name">UserName</Label>
-        <Input 
-          id="name" 
-          type="text" 
-          placeholder="admin123" 
-          value={userName} 
-          onChange={(e)=>setName(e.target.value)} 
-          />
+        <Input
+          id="name"
+          type="text"
+          placeholder="admin123"
+          value={userName}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
       <div className="grid gap-2 mb-4">
         <Label htmlFor="email">Email</Label>
@@ -63,27 +56,23 @@ export default function AdminForm() {
       </div>
       <div className="grid gap-2 mb-4">
         <Label htmlFor="password">Password</Label>
-        <Input 
-          id="password" 
-          type="password" 
-          placeholder="Enter your password" 
+        <Input
+          id="password"
+          type="password"
+          placeholder="Enter your password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button 
+      <button
         type="submit"
         onClick={createUserHandler}
         className={`
           bg-primary text-primary-foreground px-4 py-2 rounded-md transition duration-300
-        ${isFormValid
-          ? "cursor-pointer hover:opacity-90"
-          : "cursor-not-allowed opacity-60"
-        }`
-        }
+        ${isFormValid ? 'cursor-pointer hover:opacity-90' : 'cursor-not-allowed opacity-60'}`}
         disabled={!isFormValid || createUser.isLoading}
-        >
-        {createUser.isLoading ? "Creating..." : "Add Admin"}
+      >
+        {createUser.isLoading ? 'Creating...' : 'Add Admin'}
       </button>
     </div>
   );

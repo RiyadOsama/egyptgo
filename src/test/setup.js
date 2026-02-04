@@ -1,9 +1,9 @@
-import "@testing-library/jest-dom";
-import { vi } from "vitest";
-import React from "react";
+import '@testing-library/jest-dom';
+import { vi } from 'vitest';
+import React from 'react';
 
 // Mock Next.js router
-vi.mock("next/navigation", () => ({
+vi.mock('next/navigation', () => ({
   useRouter: () => ({
     push: vi.fn(),
     replace: vi.fn(),
@@ -12,12 +12,12 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => ({
     get: vi.fn(),
   }),
-  usePathname: () => "",
+  usePathname: () => '',
 }));
 
 // Mock Next.js Link component
-vi.mock("next/link", () => ({
+vi.mock('next/link', () => ({
   default: ({ children, href, ...props }) => {
-    return React.createElement("a", { href, ...props }, children);
+    return React.createElement('a', { href, ...props }, children);
   },
 }));

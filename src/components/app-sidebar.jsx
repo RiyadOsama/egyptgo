@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { PersonStanding, LayoutDashboard,LocateIcon, Package2Icon, PlaneIcon } from "lucide-react";
+import Link from 'next/link';
+import { PersonStanding, LayoutDashboard, LocateIcon, Package2Icon, PlaneIcon } from 'lucide-react';
 import {
   Sidebar,
   SidebarContent,
@@ -11,30 +11,30 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "./ui/sidebar";
-import { usePathname } from "next/navigation";
-import LogoutButton from "./logout.button";
+} from './ui/sidebar';
+import { usePathname } from 'next/navigation';
+import LogoutButton from './logout.button';
 
 const items = [
   {
-    title: "Dashboard",
+    title: 'Dashboard',
     icon: LayoutDashboard,
-    href: "/dashboard",
+    href: '/dashboard',
   },
   {
-    title: "Manage Destinations",
+    title: 'Manage Destinations',
     icon: LocateIcon,
-    href: "/dashboard/destinations",
+    href: '/dashboard/destinations',
   },
   {
-    title: "Manage Packages",
+    title: 'Manage Packages',
     icon: Package2Icon,
-    href: "/dashboard/packs",
+    href: '/dashboard/packs',
   },
   {
-    title: "Add New Admin",
+    title: 'Add New Admin',
     icon: PersonStanding,
-    href: "/dashboard/create-admin",
+    href: '/dashboard/create-admin',
   },
 ];
 
@@ -58,8 +58,8 @@ export default function AppSidebar() {
                     asChild
                     className={`${
                       pathname === item.href
-                        ? "bg-primary text-primary-foreground hover:text-primary-foreground hover:bg-orange-700"
-                        : "hover:bg-primary/10 hover:text-primary"
+                        ? 'bg-primary text-primary-foreground hover:text-primary-foreground hover:bg-orange-700'
+                        : 'hover:bg-primary/10 hover:text-primary'
                     } rounded-md text-md transition duration-400`}
                   >
                     <Link href={item.href}>
@@ -74,7 +74,7 @@ export default function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter className="px-6 py-4">
-        <LogoutButton className="w-full dark:bg-white text-black text-md cursor-pointer transition duration-300 bg-orange-50 dark:hover:bg-gray-100 py-2 rounded-md"/>
+        <LogoutButton className="w-full dark:bg-white text-black text-md cursor-pointer transition duration-300 bg-orange-50 dark:hover:bg-gray-100 py-2 rounded-md" />
       </SidebarFooter>
     </Sidebar>
   );

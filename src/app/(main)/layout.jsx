@@ -1,22 +1,22 @@
-import { Geist, Geist_Mono } from "next/font/google";
-import "../../app/globals.css";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
+import { Geist, Geist_Mono } from 'next/font/google';
+import '../../app/globals.css';
+import Header from '@/components/header';
+import Footer from '@/components/footer';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata = {
   title: 'EgyptGo',
-  icons:{
-    icon: "../favicon.svg"
+  icons: {
+    icon: '../favicon.svg',
   },
   description: "Discover Egypt's Wonders",
 };

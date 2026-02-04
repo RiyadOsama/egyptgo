@@ -6,11 +6,7 @@ import PaginationControls from '@/components/pagination-controls';
 import PackageCard from '@/components/package-card';
 import { ChevronDown } from 'lucide-react';
 
-export default function PackagesClient({
-  packages,
-  totalPages,
-  currentPage,
-}) {
+export default function PackagesClient({ packages, totalPages, currentPage }) {
   const [sortBy, setSortBy] = useState('name');
 
   const sortedPackages = [...packages].sort((a, b) => {
@@ -23,11 +19,9 @@ export default function PackagesClient({
     <main className="bg-background">
       <section className="container mx-auto py-8 px-4">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-10">
-          <div className='mb-4'>
+          <div className="mb-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">All Packages</h1>
-            <p className="text-lg text-muted-(--foreground) max-w-2xl">
-              Browse all available packages across Egypt
-            </p>
+            <p className="text-lg text-muted-(--foreground) max-w-2xl">Browse all available packages across Egypt</p>
           </div>
           <div className="w-fit flex items-center gap-3 bg-card p-2 rounded-xl border">
             <label className="text-sm font-semibold">Sort by:</label>
@@ -52,11 +46,8 @@ export default function PackagesClient({
             </Link>
           ))}
         </div>
-        <div className='mt-12'>
-          <PaginationControls
-            currentPage={currentPage}
-            totalPages={totalPages}
-          />
+        <div className="mt-12">
+          <PaginationControls currentPage={currentPage} totalPages={totalPages} />
         </div>
       </section>
     </main>

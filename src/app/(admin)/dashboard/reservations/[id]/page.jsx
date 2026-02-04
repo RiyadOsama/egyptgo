@@ -1,37 +1,39 @@
 'use client';
-import { Button } from "@/components/ui/button";
-import { Calendar, Mail, Phone, User, MapPin, Users, DollarSign, Package, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { useGetBookingById } from "@/hooks/use-bookings";
-import { useGetUserById } from "@/hooks/use-user";
-import { useGetPackageById } from "@/hooks/use-packages";
-import { useParams } from "next/navigation";
-
+import { Button } from '@/components/ui/button';
+import { Calendar, Mail, Phone, User, MapPin, Users, DollarSign, Package, ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { useGetBookingById } from '@/hooks/use-bookings';
+import { useGetUserById } from '@/hooks/use-user';
+import { useGetPackageById } from '@/hooks/use-packages';
+import { useParams } from 'next/navigation';
 
 export default function ReservationDetailPage() {
   const params = useParams();
-  const {data:reservation, isLoading, isError} = useGetBookingById(params.id);
-  console.log("Reservation data in detail page:", reservation);
-  const {data:userData, isLoading:userLoading, isError:userError} = useGetUserById(reservation?.data.userId);
-  console.log("User data in detail page:", userData);
-  const {data:packageData, isLoading:packageLoading, isError:packageError} = useGetPackageById(reservation?.data.packageId);
-  console.log("Package data in detail page:", packageData);
-  const formattedDate = new Date(reservation?.data.createdAt)
-  .toLocaleDateString("en-GB");
-  if(isLoading || userLoading){
+  const { data: reservation, isLoading, isError } = useGetBookingById(params.id);
+  console.log('Reservation data in detail page:', reservation);
+  const { data: userData, isLoading: userLoading, isError: userError } = useGetUserById(reservation?.data.userId);
+  console.log('User data in detail page:', userData);
+  const {
+    data: packageData,
+    isLoading: packageLoading,
+    isError: packageError,
+  } = useGetPackageById(reservation?.data.packageId);
+  console.log('Package data in detail page:', packageData);
+  const formattedDate = new Date(reservation?.data.createdAt).toLocaleDateString('en-GB');
+  if (isLoading || userLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-      <p>Loading...</p>
+        <p>Loading...</p>
       </div>
     );
   }
 
-  if(isError || userError){
+  if (isError || userError) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-      <p>Error loading Details.</p>
+        <p>Error loading Details.</p>
       </div>
-    )
+    );
   }
   return (
     <div>
@@ -92,7 +94,7 @@ export default function ReservationDetailPage() {
                 <p className="text-base font-medium">{packageData?.data.duration} days</p>
               </div>
               <div>
-              <p className="text-sm text-muted-foreground">Number of Guests</p>
+                <p className="text-sm text-muted-foreground">Number of Guests</p>
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-muted-foreground" />
                   <p className="text-base">{reservation?.data.numberOfPeople} guests</p>

@@ -1,4 +1,4 @@
-import DestinationForm from "@/components/destination-form";
+import DestinationForm from '@/components/destination-form';
 
 export default function CreateDestinationPage() {
   return (

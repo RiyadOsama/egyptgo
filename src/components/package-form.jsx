@@ -1,21 +1,17 @@
 'use client';
 
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import SelectMenu from "./select-menu";
-import {
-  useCreatePackage,
-  useUpdatePackage,
-  useGetPackageById,
-} from "@/hooks/use-packages";
-import { useGetAllDestinations } from "@/hooks/use-destinations";
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { Label } from './ui/label';
+import { Input } from './ui/input';
+import SelectMenu from './select-menu';
+import { useCreatePackage, useUpdatePackage, useGetPackageById } from '@/hooks/use-packages';
+import { useGetAllDestinations } from '@/hooks/use-destinations';
 
 export default function PackageForm({ id }) {
   const router = useRouter();
   const isEdit = Boolean(id);
-  console.log(id)
+  console.log(id);
 
   const { data: packageData } = useGetPackageById(id);
   const { data: destinationsData } = useGetAllDestinations();
@@ -24,13 +20,13 @@ export default function PackageForm({ id }) {
   const updatePackage = useUpdatePackage(id);
 
   const [form, setForm] = useState({
-    name: "",
-    duration: "",
-    price: "",
-    destinationId: "",
-    groupSize: "",
-    activities: "",
-    description: "",
+    name: '',
+    duration: '',
+    price: '',
+    destinationId: '',
+    groupSize: '',
+    activities: '',
+    description: '',
     image: null,
     imagePreview: null,
   });
@@ -44,7 +40,7 @@ export default function PackageForm({ id }) {
         price: p.price,
         destinationId: String(p.destinationId),
         groupSize: p.groupSize,
-        activities: p.included.join(", "),
+        activities: p.included.join(', '),
         description: p.description,
         image: null,
         imagePreview: p.image?.url || null,
@@ -57,45 +53,42 @@ export default function PackageForm({ id }) {
   };
 
   const isFormValid =
-  form.name.trim() !== "" &&
-  form.description.trim() !== "" &&
-  form.duration !== "" &&
-  form.groupSize !== "" &&
-  form.price !== "" &&
-  // form.destinationId !== "" &&
-  (id ? true : form.image !== null);
+    form.name.trim() !== '' &&
+    form.description.trim() !== '' &&
+    form.duration !== '' &&
+    form.groupSize !== '' &&
+    form.price !== '' &&
+    // form.destinationId !== "" &&
+    (id ? true : form.image !== null);
 
   const submitHandler = (e) => {
     e.preventDefault();
 
     const formData = new FormData();
-    formData.append("name", form.name);
-    formData.append("description", form.description);
-    formData.append("duration", Number(form.duration));
-    formData.append("groupSize", Number(form.groupSize));
-    formData.append("price", Number(form.price));
-    formData.append("destinationId", form.destinationId);
-    formData.append(
-      "included",
-      JSON.stringify(form.activities.split(",").map(a => a.trim()))
-    );
+    formData.append('name', form.name);
+    formData.append('description', form.description);
+    formData.append('duration', Number(form.duration));
+    formData.append('groupSize', Number(form.groupSize));
+    formData.append('price', Number(form.price));
+    formData.append('destinationId', form.destinationId);
+    formData.append('included', JSON.stringify(form.activities.split(',').map((a) => a.trim())));
 
-    if (form.image) formData.append("image", form.image);
+    if (form.image) formData.append('image', form.image);
 
     isEdit
       ? updatePackage.mutate(
-        {id, data: formData},
-        {
-          onSuccess: () => {
-            router.push("/dashboard/packs");
-          }
-        }
-      )
+          { id, data: formData },
+          {
+            onSuccess: () => {
+              router.push('/dashboard/packs');
+            },
+          },
+        )
       : createPackage.mutate(formData, {
-        onSuccess: () => {
-          router.push("/dashboard/packs");
-        }
-      });
+          onSuccess: () => {
+            router.push('/dashboard/packs');
+          },
+        });
   };
 
   return (
@@ -106,7 +99,7 @@ export default function PackageForm({ id }) {
           <Label>Package Name</Label>
           <Input
             value={form.name}
-            onChange={(e) => handleChange("name", e.target.value)}
+            onChange={(e) => handleChange('name', e.target.value)}
             placeholder="e.g. Safari Experience"
             className="rounded-xl mt-1"
           />
@@ -118,7 +111,7 @@ export default function PackageForm({ id }) {
             <Input
               type="number"
               value={form.duration}
-              onChange={(e) => handleChange("duration", e.target.value)}
+              onChange={(e) => handleChange('duration', e.target.value)}
               className="rounded-xl mt-1"
             />
           </div>
@@ -127,7 +120,7 @@ export default function PackageForm({ id }) {
             <Input
               type="number"
               value={form.price}
-              onChange={(e) => handleChange("price", e.target.value)}
+              onChange={(e) => handleChange('price', e.target.value)}
               className="rounded-xl mt-1"
             />
           </div>
@@ -141,7 +134,7 @@ export default function PackageForm({ id }) {
                 key={`destination-${id}-${form.destinationId}`}
                 destinationsData={destinationsData}
                 value={form.destinationId}
-                onChange={(id) => handleChange("destinationId", id)}
+                onChange={(id) => handleChange('destinationId', id)}
               />
             </div>
           </div>
@@ -150,7 +143,7 @@ export default function PackageForm({ id }) {
             <Input
               type="number"
               value={form.groupSize}
-              onChange={(e) => handleChange("groupSize", e.target.value)}
+              onChange={(e) => handleChange('groupSize', e.target.value)}
               className="rounded-xl mt-1"
             />
           </div>
@@ -161,7 +154,7 @@ export default function PackageForm({ id }) {
           <textarea
             rows={3}
             value={form.activities}
-            onChange={(e) => handleChange("activities", e.target.value)}
+            onChange={(e) => handleChange('activities', e.target.value)}
             className="w-full rounded-xl px-4 py-3 mt-1 border border-border bg-background"
             placeholder="Enter activities separated by commas"
           />
@@ -172,7 +165,7 @@ export default function PackageForm({ id }) {
           <textarea
             rows={4}
             value={form.description}
-            onChange={(e) => handleChange("description", e.target.value)}
+            onChange={(e) => handleChange('description', e.target.value)}
             className="w-full rounded-xl px-4 py-3 mt-1 border border-border bg-background"
             placeholder="Package description"
           />
@@ -187,32 +180,29 @@ export default function PackageForm({ id }) {
             onChange={(e) => {
               const file = e.target.files?.[0];
               if (file) {
-                handleChange("image", file);
-                handleChange("imagePreview", URL.createObjectURL(file));
+                handleChange('image', file);
+                handleChange('imagePreview', URL.createObjectURL(file));
               }
             }}
           />
         </div>
 
         {form.imagePreview && (
-          <img
-            src={form.imagePreview}
-            className="w-40 h-40 rounded-xl object-cover"
-            alt="preview"
-          />
+          <img src={form.imagePreview} className="w-40 h-40 rounded-xl object-cover" alt="preview" />
         )}
 
         <button
           type="submit"
-          className={
-            `py-3 px-3 rounded-xl font-bold active:scale-[0.97] transition-all bg-primary text-primary-foreground
-            ${isFormValid
-              ? "cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] hover:opacity-90"
-              : "cursor-not-allowed opacity-60"}
+          className={`py-3 px-3 rounded-xl font-bold active:scale-[0.97] transition-all bg-primary text-primary-foreground
+            ${
+              isFormValid
+                ? 'cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] hover:opacity-90'
+                : 'cursor-not-allowed opacity-60'
+            }
           `}
           disabled={!isFormValid || createPackage.isLoading || updatePackage.isLoading}
         >
-          {isEdit ? "Update Package" : "Create Package"}
+          {isEdit ? 'Update Package' : 'Create Package'}
         </button>
       </form>
     </div>

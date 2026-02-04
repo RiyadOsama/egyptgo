@@ -1,16 +1,16 @@
 'use client';
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
-import { ModeToggle } from "./mode-toggle";
-import LogoutButton from "./logout.button";
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { ModeToggle } from './mode-toggle';
+import LogoutButton from './logout.button';
 
 const links = [
-  { href: "/destinations", label: "Destinations" },
-  { href: "/packs", label: "Packages" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: '/destinations', label: 'Destinations' },
+  { href: '/packs', label: 'Packages' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    setIsAuth(document.cookie.includes("token="));
+    setIsAuth(document.cookie.includes('token='));
   }, []);
 
   const closeMenu = () => setIsOpen(false);
@@ -27,23 +27,16 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-background/70 backdrop-blur-sm border-b border-border">
       <nav className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="flex items-center justify-between h-16">
-
           {/* Logo */}
-          <Link
-            href="/"
-            className="font-bold bg-primary text-primary-foreground px-3 py-1 rounded-md"
-          >
+          <Link href="/" className="font-bold bg-primary text-primary-foreground px-3 py-1 rounded-md">
             EgyptGo
           </Link>
 
           {/* Desktop Links */}
           <ul className="hidden md:flex gap-6 items-center">
-            {links.map(link => (
+            {links.map((link) => (
               <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="hover:text-primary transition"
-                >
+                <Link href={link.href} className="hover:text-primary transition">
                   {link.label}
                 </Link>
               </li>
@@ -65,10 +58,7 @@ export default function Header() {
           {/* Mobile Actions */}
           <div className="flex md:hidden gap-4 items-center">
             <ModeToggle />
-            <button
-              onClick={() => setIsOpen(prev => !prev)}
-              className="p-2 hover:bg-accent rounded-md transition"
-            >
+            <button onClick={() => setIsOpen((prev) => !prev)} className="p-2 hover:bg-accent rounded-md transition">
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
@@ -78,7 +68,7 @@ export default function Header() {
         {isOpen && (
           <div className="md:hidden border-t border-border">
             <ul className="flex flex-col py-4 space-y-2">
-              {links.map(link => (
+              {links.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -92,11 +82,7 @@ export default function Header() {
 
               <li className="border-t border-border pt-2 mt-2 px-4">
                 {!isAuth ? (
-                  <Link
-                    href="/login"
-                    onClick={closeMenu}
-                    className="block py-2 hover:bg-accent rounded-md transition"
-                  >
+                  <Link href="/login" onClick={closeMenu} className="block py-2 hover:bg-accent rounded-md transition">
                     Sign in
                   </Link>
                 ) : (

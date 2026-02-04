@@ -1,6 +1,5 @@
 'use client';
-export default function BookingSummary({packageData, totalPrice}) {
-  
+export default function BookingSummary({ packageData, totalPrice }) {
   return (
     <div>
       <div className="bg-primary text-background rounded-lg p-6 sticky top-24 shadow-md border border-border">

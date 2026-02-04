@@ -6,7 +6,6 @@ import { useDeletePackage, useGetFullPackages } from '@/hooks/use-packages';
 import PackageCard from './package-card';
 
 export default function PackageList() {
-
   const { data: packageData, isLoading, isError } = useGetFullPackages();
   const deleteMutation = useDeletePackage();
 

@@ -1,4 +1,4 @@
-import PackageForm from "@/components/package-form";
+import PackageForm from '@/components/package-form';
 export default function CreatePackagePage() {
   return (
     <div className="max-w-7xl lg:mx-auto lg:w-3xl xl:mx-auto xl:w-4xl py-10 px-4 sm:px-6 lg:px-8">

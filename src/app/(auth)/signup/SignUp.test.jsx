@@ -1,42 +1,42 @@
-import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import SignupPage from "./page";
-import { vi } from "vitest";
+import React from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import SignupPage from './page';
+import { vi } from 'vitest';
 
-vi.mock("@/hooks/use-auth", () => ({
+vi.mock('@/hooks/use-auth', () => ({
   useRegister: () => ({
     mutate: vi.fn(),
     isPending: false,
   }),
 }));
 
-describe("Signup Page", () => {
-  test("renders signup form", () => {
+describe('Signup Page', () => {
+  test('renders signup form', () => {
     render(<SignupPage />);
-    expect(screen.getByRole("heading", { name: /signup/i })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /signup/i })).toBeInTheDocument();
   });
 
-  test("shows error when passwords do not match", () => {
+  test('shows error when passwords do not match', () => {
     render(<SignupPage />);
 
     fireEvent.change(screen.getByLabelText(/name/i), {
-      target: { value: "Mohamed" },
+      target: { value: 'Mohamed' },
     });
 
     fireEvent.change(screen.getByLabelText(/email/i), {
-      target: { value: "test@test.com" },
+      target: { value: 'test@test.com' },
     });
 
     fireEvent.change(screen.getByLabelText(/^password$/i), {
-      target: { value: "12345678" },
+      target: { value: '12345678' },
     });
 
     fireEvent.change(screen.getByLabelText(/confirmation/i), {
-      target: { value: "wrongpass" },
+      target: { value: 'wrongpass' },
     });
 
-    const submitButton = screen.getByRole("button", { name: /signup/i });
-    
+    const submitButton = screen.getByRole('button', { name: /signup/i });
+
     // Button should be disabled when passwords don't match
     expect(submitButton).toBeDisabled();
   });
