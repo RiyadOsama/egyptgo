@@ -7,7 +7,7 @@ import { Edit, Trash2, Calendar, MapPin, DollarSign } from 'lucide-react';
 export default function PackageCard({ pkg, onDelete, showActions = false, isDeleting = false }) {
   return (
     <div className="rounded-xl overflow-hidden shadow-sm dark:shadow-[0_4px_20px_rgba(255,255,255,0.1)] dark:border-gray-700 border border-border bg-card hover:shadow-lg hover:border-primary/50 transition-all flex flex-col h-full group">
-      <div className="relative h-48 w-full overflow-hidden bg-gradient-to-br from-muted to-muted/50">
+      <div className="relative h-48 w-full overflow-hidden bg-linear-to-br from-muted to-muted/50">
         <Image
           src={pkg.image?.url || 'https://placehold.co/600x400?text=No+Image'}
           fill
@@ -15,7 +15,7 @@ export default function PackageCard({ pkg, onDelete, showActions = false, isDele
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
       </div>
 
       <div className="p-5 flex-1 flex flex-col">

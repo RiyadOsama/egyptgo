@@ -137,7 +137,7 @@ export default function PackageForm({ id }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <Label className="text-foreground font-semibold mb-2.5 block flex items-center gap-2">
+            <Label className="text-foreground font-semibold mb-2.5 flex items-center gap-2">
               <MapPin className="h-4 w-4" />
               Destination
             </Label>
@@ -188,7 +188,7 @@ export default function PackageForm({ id }) {
         </div>
 
         <div>
-          <Label className="text-foreground font-semibold mb-2.5 block flex items-center gap-2">
+          <Label className="text-foreground font-semibold mb-2.5 flex items-center gap-2">
             <Upload className="h-4 w-4" />
             Package Image
           </Label>
