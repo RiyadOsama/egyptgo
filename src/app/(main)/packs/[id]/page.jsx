@@ -3,30 +3,34 @@ import { allPackages } from '@/lib/mock-data';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Check } from 'lucide-react';
+import { Check, Package } from 'lucide-react';
 import { useGetPackageById } from '@/hooks/use-packages';
+import ErrorState from '@/components/error-state';
+import DetailSkeleton from '@/components/detail-skeleton';
 
 export default function PackageDetailPage() {
   const params = useParams();
-  const { data, isLoading, isError } = useGetPackageById(params.id);
+  const { data, isLoading, isError, refetch } = useGetPackageById(params.id);
   const packageData = data?.data;
   console.log('Package data in detail page:', packageData);
   const router = useRouter();
 
   if (isLoading) {
-    return (
-      <>
-        <div className="min-h-screen flex items-center justify-center">
-          <p>Loading...</p>
-        </div>
-      </>
-    );
+    return <DetailSkeleton />;
   }
+
   if (isError || !packageData) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Error loading package details.</p>
-      </div>
+      <main className="bg-background">
+        <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
+          <ErrorState
+            title="Failed to load package"
+            message="We couldn't load the package details. Please check your connection and try again."
+            icon={Package}
+            onRetry={() => refetch()}
+          />
+        </section>
+      </main>
     );
   }
 

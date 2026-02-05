@@ -1,44 +1,56 @@
 'use client';
 import AvailablePackageCard from '@/components/avilable-pakage-card';
+import ErrorState from '@/components/error-state';
+import DetailSkeleton from '@/components/detail-skeleton';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useGetDestinationById } from '@/hooks/use-destinations';
 import { useParams } from 'next/navigation';
+import { MapPin } from 'lucide-react';
 
 export default function DestinationDetailPage() {
   const params = useParams();
-  // const { id } = params;
   const {
     data: destinationData,
     isLoading: isDestinationLoading,
     isError: isDestinationError,
+    refetch,
   } = useGetDestinationById(params.id);
   const destination = destinationData?.data || {};
 
   if (isDestinationLoading) {
-    return <div className="text-center py-20">Loading...</div>;
+    return <DetailSkeleton />;
   }
+
   if (isDestinationError) {
-    return <div className="text-center py-20">Error loading destination details.</div>;
+    return (
+      <main className="bg-background">
+        <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
+          <ErrorState
+            title="Failed to load destination"
+            message="We couldn't load the destination details. Please check your connection and try again."
+            icon={MapPin}
+            onRetry={() => refetch()}
+          />
+        </section>
+      </main>
+    );
   }
+
   console.log('Destination data in detail page:', destinationData);
   return (
     <main className="bg-background">
       <section className="container mx-auto py-8 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
-            <nav className="mb-3 text-sm text-muted-foreground">
-              <Link href="/destinations" className="text-primary hover:underline">
-                Destinations
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-foreground font-semibold">{destination.name}</span>
-            </nav>
+            <Link href="/destinations" className="text-primary hover:underline mb-6 inline-block">
+              ← Back to Destinations
+            </Link>
 
             <h1 className="text-4xl md:text-5xl font-extrabold text-foreground mb-4 tracking-tight">
               {destination?.name}
             </h1>
-            <p className="text-lg text-muted-(--foreground) max-w-3xl">{destination.description}</p>
+            <p className="text-lg text-muted-foreground max-w-3xl">{destination.description}</p>
           </div>
 
           <div className="mb-12 rounded-lg overflow-hidden shadow-lg relative">
