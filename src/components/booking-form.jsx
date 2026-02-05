@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ChevronDown, CheckCircle2 } from 'lucide-react';
+import { ChevronDown, CheckCircle2, Loader2 } from 'lucide-react';
 import { useCreateBooking } from '@/hooks/use-bookings';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
@@ -165,15 +165,22 @@ export default function BookingForm({ packageData, totalPrice, setTotalPrice }) 
           type="submit"
           onClick={bookingSubmitHandler}
           className={`
-            w-full py-4 rounded-xl font-bold mt-4 transition-all
+            w-full py-4 rounded-xl font-bold mt-4 transition-all flex items-center justify-center gap-2
             ${
               isFormValid
-                ? 'bg-primary text-primary-foreground cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] active:scale-[0.97]'
+                ? 'bg-primary text-primary-foreground cursor-pointer shadow-[0_10px_20px_var(--color-primary)/20] active:scale-[0.97] hover:opacity-90'
                 : 'bg-muted text-muted-foreground cursor-not-allowed opacity-60'
             }`}
           disabled={!isFormValid || createBookingMutation.isPending}
         >
-          Confirm My Booking
+          {createBookingMutation.isPending ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin" />
+              Confirming...
+            </>
+          ) : (
+            'Confirm My Booking'
+          )}
         </button>
       </form>
 
